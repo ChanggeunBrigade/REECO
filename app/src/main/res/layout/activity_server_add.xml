@@ -18,7 +18,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="53dp"
         android:layout_marginTop="10dp"
         android:padding="15dp"
         android:background="@drawable/shape_rectangle_with_stroke"
@@ -27,7 +27,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:padding="15dp"
         android:background="@drawable/shape_rectangle_with_stroke"
@@ -36,7 +36,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:padding="15dp"
         android:background="@drawable/shape_rectangle_with_stroke"
@@ -45,7 +45,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:padding="15dp"
         android:background="@drawable/shape_rectangle_with_stroke"
