@@ -1,7 +1,7 @@
 package com.example.reeco;
 
 public class GridItem {
-    private String m_str;
+    private final String m_str;
 
     public GridItem(String m_str) {
         this.m_str = m_str;

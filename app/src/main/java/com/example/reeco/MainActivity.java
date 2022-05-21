@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        m_grid = (GridView) findViewById(R.id.grid_test);
+        m_grid = findViewById(R.id.grid_test);
         m_gridAdt = new GridAdapter(this);
 
         for(int i = 0; i < 5; i++) {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         m_grid.setAdapter(m_gridAdt);
 
-        Button btnServerAdd = (Button) findViewById(R.id.BtnServerAdd);
+        Button btnServerAdd = findViewById(R.id.BtnServerAdd);
 
         btnServerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
