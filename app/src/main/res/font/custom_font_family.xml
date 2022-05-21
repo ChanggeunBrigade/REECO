@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <!-- Regular 굵기 -->
+    <font
+        android:font="@font/regular"
+        android:fontStyle="normal"
+        app:font="@font/regular"
+        app:fontStyle="normal" />
+
+    <!-- Medium 굵기 -->
+    <font
+        android:font="@font/medium"
+        android:fontStyle="normal"
+        app:font="@font/medium"
+        app:fontStyle="normal" />
+
+    <!-- Semi Bold 굵기 -->
+    <font
+        android:font="@font/semibold"
+        android:fontStyle="normal"
+        app:font="@font/semibold"
+        app:fontStyle="normal" />
+
+    <!-- Bold 굵기 -->
+    <font
+        android:font="@font/bold"
+        android:fontStyle="normal"
+        app:font="@font/bold"
+        app:fontStyle="normal" />
+
+</font-family>

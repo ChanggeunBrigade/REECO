@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/item_imagebutton"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_rectangle_with_stroke"
+        android:foreground="?selectableItemBackground"
+        android:padding="50dp"
+        android:src="@drawable/imgbtn2"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/item_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/medium"
+        android:text="서버 1"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:gravity="center" />
+
+</LinearLayout>
