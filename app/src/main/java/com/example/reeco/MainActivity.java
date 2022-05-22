@@ -1,19 +1,18 @@
 package com.example.reeco;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
-public class MainActivity extends AppCompatActivity {
-    private GridView m_grid;
-    private GridAdapter m_gridAdt;
-    Button btnServerAdd;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,15 +20,25 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
 
-        m_grid = findViewById(R.id.grid_test);
-        m_gridAdt = new GridAdapter(this);
+        GridView gridList = findViewById(R.id.grid_test);
+        GridAdapter gridAdt = new GridAdapter(this);
 
-        for(int i = 0; i < 9; i++) {
-            String strNo = "서버 " + i;
-            m_gridAdt.setItem(strNo);
+        AppDatabase db = AppDatabase.getInstance(this);
+        List<Server> servers = db.serverDao().getServers();
+
+        for(int i = 0; i < servers.size(); i++) {
+            gridAdt.setItem(servers.get(i).getName());
         }
 
-        m_grid.setAdapter(m_gridAdt);
+        gridList.setAdapter(gridAdt);
+
+        gridList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
+
+            }
+        });
 
         Button btnServerAdd = findViewById(R.id.BtnServerAdd);
 
