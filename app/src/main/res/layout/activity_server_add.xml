@@ -61,20 +61,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <android.widget.Button
+            style="@style/CustomButtonBlueStyle"
             android:id="@+id/btnServerAdd2"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_rectangle_nostroke_bluecolor"
-            android:fontFamily="@font/semibold"
-            android:foreground="?selectableItemBackground"
-            android:letterSpacing="0"
             android:text="서버 추가"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp" />
+            />
     </LinearLayout>
 
 
