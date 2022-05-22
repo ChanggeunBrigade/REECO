@@ -21,6 +21,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="10dp"
         android:padding="15dp"
+        android:textSize="18dp"
         android:background="@drawable/shape_rectangle_with_stroke"
         android:fontFamily="@font/regular"
         android:hint="IP Address" />
@@ -30,6 +31,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:padding="15dp"
+        android:textSize="18dp"
         android:background="@drawable/shape_rectangle_with_stroke"
         android:fontFamily="@font/regular"
         android:hint="Port Number" />
@@ -39,6 +41,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:padding="15dp"
+        android:textSize="18dp"
         android:background="@drawable/shape_rectangle_with_stroke"
         android:fontFamily="@font/regular"
         android:hint="Username" />
@@ -48,6 +51,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:padding="15dp"
+        android:textSize="18dp"
         android:background="@drawable/shape_rectangle_with_stroke"
         android:fontFamily="@font/regular"
         android:hint="Password" />
@@ -56,21 +60,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
-            style="?android:attr/borderlessButtonStyle"
             android:id="@+id/btnServerAdd2"
-            android:background="@drawable/shape_rectangle_nostroke_bluecolor"
-            android:foreground="?selectableItemBackground"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_rectangle_nostroke_bluecolor"
             android:fontFamily="@font/semibold"
+            android:foreground="?selectableItemBackground"
             android:letterSpacing="0"
             android:text="서버 추가"
-            android:textSize="18dp"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="20dp"
-            />
+            android:textSize="18dp" />
     </LinearLayout>
 
 

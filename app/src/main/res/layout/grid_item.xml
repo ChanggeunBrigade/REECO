@@ -7,12 +7,12 @@
 
     <ImageButton
         android:id="@+id/item_imagebutton"
-        android:layout_width="100dp"
-        android:layout_height="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:adjustViewBounds="true"
         android:background="@drawable/shape_rectangle_with_stroke"
         android:foreground="?selectableItemBackground"
-        android:padding="50dp"
         android:src="@drawable/imgbtn2"
         tools:ignore="SpeakableTextPresentCheck" />
 
