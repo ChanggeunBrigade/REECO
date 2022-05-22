@@ -22,14 +22,14 @@
     <GridView
         android:id="@+id/grid_test"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="440dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:horizontalSpacing="20dp"
         android:numColumns="3"
-        android:scrollbarSize="2dp"
+        android:scrollbarSize="5dp"
         android:scrollbarStyle="insideInset"
-        android:scrollbarThumbVertical="@color/purple_500"
+        android:scrollbarThumbVertical="@color/gray"
         android:scrollbarTrackVertical="@color/white"
         android:verticalScrollbarPosition="right"
 
@@ -50,7 +50,6 @@
         android:letterSpacing="0"
         android:text="서버 추가"
         android:textSize="18dp"
-        android:layout_marginTop="70dp"
         />
 
 </LinearLayout>

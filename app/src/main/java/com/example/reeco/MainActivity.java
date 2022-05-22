@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         m_grid = findViewById(R.id.grid_test);
         m_gridAdt = new GridAdapter(this);
 
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 9; i++) {
             String strNo = "서버 " + i;
             m_gridAdt.setItem(strNo);
         }
