@@ -9,6 +9,8 @@ public class Server {
     private String name;
     private String ip;
     private int port;
+    private String user;
+    private String password;
 
     public String getName() {
         return name;
@@ -42,5 +44,21 @@ public class Server {
             throw new IllegalArgumentException("invalid port number");
         }
         this.port = port;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
