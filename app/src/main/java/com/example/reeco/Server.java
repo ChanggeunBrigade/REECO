@@ -1,5 +1,6 @@
 package com.example.reeco;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Index;
 
@@ -24,7 +25,7 @@ public class Server {
         return ip;
     }
 
-    public void setIp(String ip) throws IllegalArgumentException {
+    public void setIp(@NonNull String ip) throws IllegalArgumentException {
         // 인자가 IPv4 규칙과 일치하지 않으면 예외를 던집니다.
         // 출처: https://stackoverflow.com/questions/5284147/validating-ipv4-addresses-with-regexp
         if (!ip.matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
