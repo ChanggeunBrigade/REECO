@@ -7,20 +7,35 @@ import androidx.room.Index;
 @Entity(tableName = "servers", primaryKeys = {"ip", "port"},
         indices = {@Index(value = "name", unique = true)})
 public class Server {
+    @NonNull
     private String name;
+    @NonNull
     private String ip;
     private int port;
+    @NonNull
     private String user;
+    @NonNull
     private String password;
 
+    public Server(@NonNull String name, @NonNull String ip,
+                  int port, @NonNull String user, @NonNull String password) {
+        this.name = name;
+        this.ip = ip;
+        this.port = port;
+        this.user = user;
+        this.password = password;
+    }
+
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getIp() {
         return ip;
     }
@@ -47,19 +62,21 @@ public class Server {
         this.port = port;
     }
 
+    @NonNull
     public String getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(@NonNull String user) {
         this.user = user;
     }
 
+    @NonNull
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NonNull String password) {
         this.password = password;
     }
 }
