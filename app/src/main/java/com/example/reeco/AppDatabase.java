@@ -15,7 +15,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class,
-                    "reeco_db").build();
+                    "reeco_db").allowMainThreadQueries().build();
         }
         return INSTANCE;
     }

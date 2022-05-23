@@ -2,8 +2,6 @@ package com.example.reeco;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -32,23 +30,39 @@ public class MainActivity extends AppCompatActivity {
 
         gridList.setAdapter(gridAdt);
 
-        gridList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
+        gridList.setOnItemClickListener((parent, view, position, id) -> {
+            Server server = servers.get(position);
+            Intent intent = new Intent(getApplicationContext(), CodeWriteActivity.class);
 
-            }
+            intent.putExtra("ip", server.getIp());
+            intent.putExtra("port", server.getPort());
+            intent.putExtra("user", server.getUser());
+            intent.putExtra("password", server.getPassword());
+
+            startActivity(intent);
         });
 
-        Button btnServerAdd = findViewById(R.id.BtnServerAdd);
+        gridList.setOnItemLongClickListener((parent, view, position, id) -> {
+            Server server = servers.get(position);
+            Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
 
-        btnServerAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
+            intent.putExtra("name", server.getName());
+            intent.putExtra("ip", server.getIp());
+            intent.putExtra("port", server.getPort());
+            intent.putExtra("user", server.getUser());
+            intent.putExtra("password", server.getPassword());
 
-                startActivity(intent);
-            }
+            startActivity(intent);
+
+            return true;
+        });
+
+        Button btnServerAdd = findViewById(R.id.btn_server_add);
+
+        btnServerAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
+
+            startActivity(intent);
         });
 
     }
