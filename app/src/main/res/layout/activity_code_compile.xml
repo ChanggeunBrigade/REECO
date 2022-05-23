@@ -12,7 +12,7 @@
         android:textSize="15dp"
         android:layout_marginBottom="10dp"
         android:gravity="top"
-        android:background="@drawable/shape_rectangle_gray_with_stroke"
+        android:background="@drawable/shape_rectangle_with_stroke"
         android:fontFamily="@font/regular"
         android:hint="내용을 입력하세요" />
 

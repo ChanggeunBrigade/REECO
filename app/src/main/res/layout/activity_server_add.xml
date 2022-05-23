@@ -15,7 +15,8 @@
     <EditText
         android:id="@+id/edt_server_name"
         style="@style/CustomEditTextStyle"
-        android:hint="Server Name" />
+        android:hint="Server Name"
+        />
 
     <EditText
         android:id="@+id/edt_ip_addr"

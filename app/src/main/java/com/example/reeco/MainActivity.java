@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             CustomDialog dlg = new CustomDialog(MainActivity.this);
             dlg.show();
 
-            return true;
+            return false;
         });
 
         Button btnServerAdd = findViewById(R.id.btn_server_add);
