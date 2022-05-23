@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:background="@drawable/shape_rectangle_with_stroke"
+        android:background="@drawable/shape_rectangle_with_redstroke"
         android:foreground="?selectableItemBackground"
         android:src="@drawable/imgbtn2"
         tools:ignore="SpeakableTextPresentCheck" />

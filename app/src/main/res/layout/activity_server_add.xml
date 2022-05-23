@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="20dp"
     android:orientation="vertical">
 
@@ -38,29 +38,11 @@
         android:hint="Password"
         android:inputType="textPassword" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <android.widget.Button
+        android:id="@+id/btn_server_confirm"
+        style="@style/CustomButtonBlueStyle"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:text="서버 추가" />
 
-        <android.widget.Button
-            android:id="@+id/btn_server_confirm"
-            style="@style/CustomButtonBlueStyle"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:text="서버 추가" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <android.widget.Button
-            android:id="@+id/btn_server_delete"
-            style="@style/CustomButtonRedStyle"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="서버 삭제" />
-    </LinearLayout>
 </LinearLayout>

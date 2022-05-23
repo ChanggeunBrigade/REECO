@@ -1,7 +1,9 @@
 package com.example.reeco;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -11,6 +13,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    Dialog dialog1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
         GridView gridList = findViewById(R.id.grid_test);
         GridAdapter gridAdt = new GridAdapter(this);
+
+        dialog1 = new Dialog(MainActivity.this);
+        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog1.setContentView(R.layout.custom_dialog);
 
         AppDatabase db = AppDatabase.getInstance(this);
         List<Server> servers = db.serverDao().getServers();
@@ -43,16 +52,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         gridList.setOnItemLongClickListener((parent, view, position, id) -> {
-            Server server = servers.get(position);
-            Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
-
-            intent.putExtra("name", server.getName());
-            intent.putExtra("ip", server.getIp());
-            intent.putExtra("port", server.getPort());
-            intent.putExtra("user", server.getUser());
-            intent.putExtra("password", server.getPassword());
-
-            startActivity(intent);
+            CustomDialog dlg = new CustomDialog(MainActivity.this);
+            dlg.show();
 
             return true;
         });

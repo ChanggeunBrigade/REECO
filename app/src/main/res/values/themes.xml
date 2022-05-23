@@ -29,11 +29,23 @@
         <item name="android:textSize">18dp</item>
     </style>
 
-    <!-- 빨 버튼 스타일 -->
+    <!-- 빨간색 버튼 스타일 -->
     <style name="CustomButtonRedStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/shape_rectangle_nostroke_redcolor</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:fontFamily">@font/semibold</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <!-- 빨간색 버튼 스타일 -->
+    <style name="CustomButtonGrayStyle" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_rectangle_nostroke_graycolor</item>
         <item name="android:foreground">?selectableItemBackground</item>
         <item name="android:fontFamily">@font/semibold</item>
         <item name="android:letterSpacing">0</item>
@@ -61,6 +73,16 @@
         <item name="android:letterSpacing">0</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">30dp</item>
+    </style>
+
+    <!-- 커스텀 텍스트뷰 스타일 -->
+    <style name="CustomTextViewStyle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">#494949</item>
+        <item name="android:textSize">16dp</item>
     </style>
 
     <!-- EditText 스타일 -->

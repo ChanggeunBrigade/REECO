@@ -46,7 +46,6 @@ public class ServerAddActivity extends AppCompatActivity {
         EditText edtUser = findViewById(R.id.edt_user_name);
         EditText edtPassword = findViewById(R.id.edt_password);
         Button btnServerAdd = findViewById(R.id.btn_server_confirm);
-        Button btnServerDelete = findViewById(R.id.btn_server_delete);
 
         edtName.setText(name);
         edtIp.setText(ip);
@@ -69,10 +68,8 @@ public class ServerAddActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().length() == 0) {
-                    edtName.setBackgroundColor(Color.parseColor("#FF8C8C"));
                     is_valid[0] = false;
                 } else {
-                    edtName.setBackgroundColor(Color.WHITE);
                     is_valid[0] = true;
                 }
             }
@@ -87,10 +84,8 @@ public class ServerAddActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
-                    edtIp.setBackgroundColor(Color.WHITE);
                     is_valid[0] = true;
                 } else {
-                    edtIp.setBackgroundColor(Color.parseColor("#FF8C8C"));
                     is_valid[0] = false;
                 }
             }
@@ -116,10 +111,8 @@ public class ServerAddActivity extends AppCompatActivity {
                         throw new Exception();
                     }
                 } catch (Exception e) {
-                    edtPort.setBackgroundColor(Color.parseColor("#FF8C8C"));
                     is_valid[0] = false;
                 }
-                edtPort.setBackgroundColor(Color.WHITE);
                 is_valid[0] = true;
             }
 
@@ -138,10 +131,8 @@ public class ServerAddActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().length() == 0) {
-                    edtUser.setBackgroundColor(Color.parseColor("#FF8C8C"));
                     is_valid[0] = false;
                 } else {
-                    edtUser.setBackgroundColor(Color.WHITE);
                     is_valid[0] = true;
                 }
             }
@@ -161,10 +152,8 @@ public class ServerAddActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().length() == 0) {
-                    edtPassword.setBackgroundColor(Color.parseColor("#FF8C8C"));
                     is_valid[0] = false;
                 } else {
-                    edtPassword.setBackgroundColor(Color.WHITE);
                     is_valid[0] = true;
                 }
             }
@@ -189,20 +178,6 @@ public class ServerAddActivity extends AppCompatActivity {
                     edtUser.getText().toString(),
                     edtPassword.getText().toString()
             ));
-
-            finish();
-        });
-
-        btnServerDelete.setOnClickListener(v -> {
-            if (extras != null) {
-                database.serverDao().delete(new Server(
-                        edtName.getText().toString(),
-                        edtIp.getText().toString(),
-                        Integer.parseInt(edtPort.getText().toString()),
-                        edtUser.getText().toString(),
-                        edtPassword.getText().toString()
-                ));
-            }
 
             finish();
         });
