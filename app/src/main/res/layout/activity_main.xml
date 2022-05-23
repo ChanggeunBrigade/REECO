@@ -13,8 +13,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
-        android:text="서버 선택"
-         />
+        android:text="서버 선택" />
 
     <GridView
         android:id="@+id/grid_test"
@@ -37,9 +36,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Button
+        android:id="@+id/btn_server_add"
         style="@style/CustomButtonBlueStyle"
-        android:id="@+id/BtnServerAdd"
-        android:text="서버 추가"
-        />
+        android:text="서버 추가" />
 
 </LinearLayout>

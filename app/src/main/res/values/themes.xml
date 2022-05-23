@@ -29,6 +29,18 @@
         <item name="android:textSize">18dp</item>
     </style>
 
+    <!-- 빨 버튼 스타일 -->
+    <style name="CustomButtonRedStyle" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_rectangle_nostroke_redcolor</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:fontFamily">@font/semibold</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
     <!-- 흰색 외곽선 버튼 스타일 -->
     <style name="CustomButtonWhiteStrokeStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">match_parent</item>
