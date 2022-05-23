@@ -19,10 +19,6 @@ public class CustomDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_dialog);
 
-        // 다이얼로그 배경 투명 처리
-        Objects.requireNonNull(getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
         Button deleteButton = findViewById(R.id.btn_delete);
         Button cancelButton = findViewById(R.id.btn_cancel);
 
