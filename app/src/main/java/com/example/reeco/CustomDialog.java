@@ -2,17 +2,17 @@ package com.example.reeco;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-
-import java.util.Objects;
 
 public class CustomDialog extends Dialog {
     private Context mContext;
+
+    public CustomDialog(Context mContext) {
+        super(mContext);
+        this.mContext = mContext;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,8 @@ public class CustomDialog extends Dialog {
         deleteButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 서버 삭제 시 해야할 기능은 여기에다가 추가하길 바람 오바
+                AppDatabase database = AppDatabase.getInstance(mContext);
+                database.serverDao().delete(new Server());
                 dismiss();
             }
         });
@@ -36,10 +37,5 @@ public class CustomDialog extends Dialog {
                 dismiss();
             }
         });
-    }
-
-    public CustomDialog(Context mContext) {
-        super(mContext);
-        this.mContext = mContext;
     }
 }

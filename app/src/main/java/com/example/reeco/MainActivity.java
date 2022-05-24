@@ -1,16 +1,11 @@
 package com.example.reeco;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -30,16 +25,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gridList = (GridView) findViewById(R.id.grid_test);
-        GridAdapter gridAdt = new GridAdapter(this);
 
         mDialog = new Dialog(MainActivity.this);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mDialog.setContentView(R.layout.custom_dialog);
 
+        updateItems();
+
+        Button btnServerAdd = findViewById(R.id.btn_server_add);
+
+        btnServerAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
+
+            startActivity(intent);
+            updateItems();
+        });
+    }
+
+    private void updateItems() {
         AppDatabase db = AppDatabase.getInstance(this);
         List<Server> servers = db.serverDao().getServers();
+        GridAdapter gridAdt = new GridAdapter(this);
 
-        for(int i = 0; i < servers.size(); i++) {
+        for (int i = 0; i < servers.size(); i++) {
             gridAdt.setItem(servers.get(i).getName());
         }
 
@@ -55,24 +63,17 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("password", server.getPassword());
 
             startActivity(intent);
+            updateItems();
         });
 
-        gridList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                CustomDialog dlg = new CustomDialog(MainActivity.this);
-                dlg.show();
+        gridList.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            CustomDialog dlg = new CustomDialog(MainActivity.this);
 
-                return false;
-            }
-        });
+            dlg.show();
 
-        Button btnServerAdd = findViewById(R.id.btn_server_add);
+            updateItems();
 
-        btnServerAdd.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), ServerAddActivity.class);
-
-            startActivity(intent);
+            return false;
         });
     }
 }
