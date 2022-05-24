@@ -74,17 +74,5 @@ public class MainActivity extends AppCompatActivity {
 
             startActivity(intent);
         });
-
-        
-        // 테스트 용도로 만들어둔 이벤트 리스너, 그리드 아이템은 안되는데 이건 됨
-        btnServerAdd.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                CustomDialog dlg = new CustomDialog(MainActivity.this);
-                dlg.show();
-
-                return false;
-            }
-        });
     }
 }

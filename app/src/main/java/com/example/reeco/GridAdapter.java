@@ -49,6 +49,13 @@ public class GridAdapter extends BaseAdapter {
         TextView textView = convertView.findViewById(R.id.item_textview);
         textView.setText(m_array_item.get(position).getItemString());
 
+        button.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return false;
+            }
+        });
+
         return convertView;
     }
 
