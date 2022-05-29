@@ -46,8 +46,6 @@ public class CodeWriteActivity extends AppCompatActivity {
                 intent.setType("text/*");
                 startActivityForResult(intent, 1);
 
-
-
                 String data = intent.getStringExtra("data");
                 System.out.println(data);
                 EdtcodeWrite.setText(data);
