@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <EditText
+        android:id="@+id/edt_codeWrite"
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:padding="15dp"

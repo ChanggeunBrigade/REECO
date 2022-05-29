@@ -1,13 +1,20 @@
 package com.example.reeco;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.customview.widget.Openable;
 
 public class CodeWriteActivity extends AppCompatActivity {
     @Override
@@ -17,6 +24,7 @@ public class CodeWriteActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_code_compile);
 
+        EditText EdtcodeWrite = findViewById(R.id.edt_codeWrite);
         Button btnOpenFile = findViewById(R.id.btn_openFile);
         Button btnSaveFile = findViewById(R.id.btn_saveFile);
         Button btnCompile = findViewById(R.id.btn_compile);
@@ -33,10 +41,31 @@ public class CodeWriteActivity extends AppCompatActivity {
         btnOpenFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                startActivityForResult(intent, 10);
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("text/*");
+                startActivityForResult(intent, 1);
+
+
+
+                String data = intent.getStringExtra("data");
+                System.out.println(data);
+                EdtcodeWrite.setText(data);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                Uri uri = data.getData();
+                Log.e("uri", uri.toString());
+                Intent intent = new Intent("data", uri);
+                intent.putExtra("data", uri);
+            }
+        }
     }
 }

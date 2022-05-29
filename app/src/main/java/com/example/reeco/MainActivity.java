@@ -1,5 +1,7 @@
 package com.example.reeco;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
 
 import java.util.List;
 
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         // 다크모드 무효화
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
+
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
         gridList = (GridView) findViewById(R.id.grid_test);
         GridAdapter gridAdt = new GridAdapter(this);
