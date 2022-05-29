@@ -1,6 +1,7 @@
 package com.example.reeco;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,17 @@ public class GridAdapter extends BaseAdapter {
 
         TextView textView = convertView.findViewById(R.id.item_textview);
         textView.setText(m_array_item.get(position).getItemString());
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(m_context, CodeWriteActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                m_context.startActivity(intent);
+                return;
+            }
+        });
 
         button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

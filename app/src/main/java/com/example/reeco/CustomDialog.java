@@ -26,7 +26,7 @@ public class CustomDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 AppDatabase database = AppDatabase.getInstance(mContext);
-                database.serverDao().delete(new Server());
+                // database.serverDao().delete(new Server());
                 dismiss();
             }
         });

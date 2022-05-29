@@ -23,6 +23,7 @@
         android:orientation="horizontal">
 
         <android.widget.Button
+            android:id="@+id/btn_openFile"
             style="@style/CustomButtonWhiteStrokeStyle"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
@@ -30,6 +31,7 @@
             />
 
         <android.widget.Button
+            android:id="@+id/btn_saveFile"
             style="@style/CustomButtonWhiteStrokeStyle"
             android:layout_weight="1"
             android:text="파일 저장"
@@ -37,6 +39,7 @@
     </LinearLayout>
 
     <android.widget.Button
+        android:id="@+id/btn_compile"
         style="@style/CustomButtonWhiteStrokeStyle"
         android:layout_weight="1"
         android:text="컴파일"

@@ -45,7 +45,10 @@ public class ServerAddActivity extends AppCompatActivity {
         EditText edtPort = findViewById(R.id.edt_port_num);
         EditText edtUser = findViewById(R.id.edt_user_name);
         EditText edtPassword = findViewById(R.id.edt_password);
+        EditText edtexecuteCom = findViewById(R.id.edt_execute_compiler);
         Button btnServerAdd = findViewById(R.id.btn_server_confirm);
+
+
 
         edtName.setText(name);
         edtIp.setText(ip);
@@ -55,119 +58,35 @@ public class ServerAddActivity extends AppCompatActivity {
         edtUser.setText(user);
         edtPassword.setText(password);
 
-        edtName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.toString().length() == 0) {
-                    is_valid[0] = false;
-                } else {
-                    is_valid[0] = true;
-                }
-            }
-        });
-
-        edtIp.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
-                    is_valid[0] = true;
-                } else {
-                    is_valid[0] = false;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edtPort.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int num = Integer.parseInt(s.toString());
-
-                    if (num < 1 || 65535 < num) {
-                        throw new Exception();
-                    }
-                } catch (Exception e) {
-                    is_valid[0] = false;
-                }
-                is_valid[0] = true;
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edtUser.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().length() == 0) {
-                    is_valid[0] = false;
-                } else {
-                    is_valid[0] = true;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edtPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().length() == 0) {
-                    is_valid[0] = false;
-                } else {
-                    is_valid[0] = true;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         AppDatabase database = AppDatabase.getInstance(this);
 
         btnServerAdd.setOnClickListener(v -> {
-            if (!is_valid[0]) {
+            if (edtName.getText().toString().replace(" ", "").equals("")
+                    || edtIp.getText().toString().replace(" ", "").equals("")
+                    || edtPort.getText().toString().replace(" ", "").equals("")
+                    || edtUser.getText().toString().replace(" ", "").equals("")
+                    || edtPassword.getText().toString().replace(" ", "").equals("")
+                    || edtexecuteCom.getText().toString().replace(" ", "").equals("")) {
+                if (edtName.getText().toString().replace(" ", "").equals("")) {
+                    edtName.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                }
+                if (edtIp.getText().toString().replace(" ", "").equals("")) {
+                    edtIp.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                }
+                if (edtPort.getText().toString().replace(" ", "").equals("")) {
+                    edtPort.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                }
+                if (edtUser.getText().toString().replace(" ", "").equals("")) {
+                    edtUser.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                }
+                if (edtPassword.getText().toString().replace(" ", "").equals("")) {
+                    edtPassword.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                }
+
+                if (edtexecuteCom.getText().toString().replace(" ", "").equals("")) {
+                    edtexecuteCom.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                }
+
                 Toast.makeText(this, "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();
                 return;
             }
