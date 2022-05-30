@@ -85,4 +85,14 @@ public class GridAdapter extends BaseAdapter {
     public String getItemString(int position) {
         return this.m_array_item.get(position).getItemString();
     }
+
+    public void setAllItems(List<Server> servers) {
+        for (Server server: servers) {
+            m_array_item.add(new GridItem(server.getName()));
+        }
+    }
+
+    public void clear() {
+        m_array_item.clear();
+    }
 }

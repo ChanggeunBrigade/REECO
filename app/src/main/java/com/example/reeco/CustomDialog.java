@@ -8,10 +8,12 @@ import android.widget.Button;
 
 public class CustomDialog extends Dialog {
     private Context mContext;
+    private String name;
 
-    public CustomDialog(Context mContext) {
+    public CustomDialog(Context mContext, String name) {
         super(mContext);
         this.mContext = mContext;
+        this.name = name;
     }
 
     @Override
@@ -26,7 +28,9 @@ public class CustomDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 AppDatabase database = AppDatabase.getInstance(mContext);
-                // database.serverDao().delete(new Server());
+                ServerDao serverDao = database.serverDao();
+                Server target = serverDao.findServerByName(name);
+                database.serverDao().delete(target);
                 dismiss();
             }
         });
