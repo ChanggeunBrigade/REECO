@@ -4,9 +4,7 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -14,16 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.Observer;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Dialog mDialog;
+    private final BackKeyHandler backKeyHandler = new BackKeyHandler(this);
     private GridView gridList;
-
-    private BackKeyHandler backKeyHandler = new BackKeyHandler(this);
 
     @Override
     public void onBackPressed() {
@@ -37,50 +30,41 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
 
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
         gridList = (GridView) findViewById(R.id.grid_test);
         GridAdapter gridAdt = new GridAdapter(this);
 
-        mDialog = new Dialog(MainActivity.this);
+        Dialog mDialog = new Dialog(MainActivity.this);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mDialog.setContentView(R.layout.custom_dialog);
 
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        db.serverDao().getServers().observe(this, new Observer<List<Server>>() {
-            @Override
-            public void onChanged(List<Server> servers) {
-                gridAdt.clear();
-                gridAdt.setAllItems(servers);
-                gridList.setAdapter(gridAdt);
+        db.serverDao().getServers().observe(this, servers -> {
+            gridAdt.clear();
+            gridAdt.setAllItems(servers);
+            gridList.setAdapter(gridAdt);
 
-                gridList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                        Server server = servers.get(position);
-                        Intent intent = new Intent(getApplicationContext(), CodeWriteActivity.class);
+            gridList.setOnItemClickListener((adapterView, view, position, id) -> {
+                Server server = servers.get(position);
+                Intent intent = new Intent(getApplicationContext(), CodeWriteActivity.class);
 
-                        intent.putExtra("ip", server.getIp());
-                        intent.putExtra("port", server.getPort());
-                        intent.putExtra("user", server.getUser());
-                        intent.putExtra("password", server.getPassword());
+                intent.putExtra("ip", server.getIp());
+                intent.putExtra("port", server.getPort());
+                intent.putExtra("user", server.getUser());
+                intent.putExtra("password", server.getPassword());
 
-                        Toast.makeText(getApplicationContext(), "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();
 
-                        startActivity(intent);
-                    }
-                });
+                startActivity(intent);
+            });
 
-                gridList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-                        CustomDialog dlg = new CustomDialog(MainActivity.this, gridAdt.getItemString(position));
-                        dlg.show();
+            gridList.setOnItemLongClickListener((adapterView, view, position, id) -> {
+                CustomDialog dlg = new CustomDialog(MainActivity.this, gridAdt.getItemString(position));
+                dlg.show();
 
-                        return false;
-                    }
-                });
-            }
+                return false;
+            });
         });
 
         Button btnServerAdd = findViewById(R.id.btn_server_add);

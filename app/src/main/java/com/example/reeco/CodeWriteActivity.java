@@ -2,19 +2,15 @@ package com.example.reeco;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.customview.widget.Openable;
 
 public class CodeWriteActivity extends AppCompatActivity {
     @Override
@@ -29,27 +25,21 @@ public class CodeWriteActivity extends AppCompatActivity {
         Button btnSaveFile = findViewById(R.id.btn_saveFile);
         Button btnCompile = findViewById(R.id.btn_compile);
 
-        btnCompile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CompileResultAcitivity.class);
+        btnCompile.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), CompileResultAcitivity.class);
 
-                startActivity(intent);
-            }
+            startActivity(intent);
         });
 
-        btnOpenFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("text/*");
-                startActivityForResult(intent, 1);
+        btnOpenFile.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("text/*");
+            startActivityForResult(intent, 1);
 
-                String data = intent.getStringExtra("data");
-                System.out.println(data);
-                EdtcodeWrite.setText(data);
-            }
+            String data = intent.getStringExtra("data");
+            System.out.println(data);
+            EdtcodeWrite.setText(data);
         });
     }
 

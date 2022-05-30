@@ -56,23 +56,15 @@ public class GridAdapter extends BaseAdapter {
         TextView textView = convertView.findViewById(R.id.item_textview);
         textView.setText(m_array_item.get(position).getItemString());
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(m_context, CodeWriteActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(m_context, CodeWriteActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                m_context.startActivity(intent);
-                return;
-            }
+            m_context.startActivity(intent);
+            return;
         });
 
-        button.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                return false;
-            }
-        });
+        button.setOnLongClickListener(view -> false);
 
         return convertView;
     }
@@ -87,7 +79,7 @@ public class GridAdapter extends BaseAdapter {
     }
 
     public void setAllItems(List<Server> servers) {
-        for (Server server: servers) {
+        for (Server server : servers) {
             m_array_item.add(new GridItem(server.getName()));
         }
     }

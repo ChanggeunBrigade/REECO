@@ -3,12 +3,11 @@ package com.example.reeco;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 public class CustomDialog extends Dialog {
-    private Context mContext;
-    private String name;
+    private final Context mContext;
+    private final String name;
 
     public CustomDialog(Context mContext, String name) {
         super(mContext);
@@ -24,22 +23,14 @@ public class CustomDialog extends Dialog {
         Button deleteButton = findViewById(R.id.btn_delete);
         Button cancelButton = findViewById(R.id.btn_cancel);
 
-        deleteButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppDatabase database = AppDatabase.getInstance(mContext);
-                ServerDao serverDao = database.serverDao();
-                Server target = serverDao.findServerByName(name);
-                database.serverDao().delete(target);
-                dismiss();
-            }
+        deleteButton.setOnClickListener(view -> {
+            AppDatabase database = AppDatabase.getInstance(mContext);
+            ServerDao serverDao = database.serverDao();
+            Server target = serverDao.findServerByName(name);
+            database.serverDao().delete(target);
+            dismiss();
         });
 
-        cancelButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
+        cancelButton.setOnClickListener(view -> dismiss());
     }
 }

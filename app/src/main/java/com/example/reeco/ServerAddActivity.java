@@ -1,10 +1,7 @@
 package com.example.reeco;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,7 +44,6 @@ public class ServerAddActivity extends AppCompatActivity {
         EditText edtPassword = findViewById(R.id.edt_password);
         EditText edtexecuteCom = findViewById(R.id.edt_execute_compiler);
         Button btnServerAdd = findViewById(R.id.btn_server_confirm);
-
 
 
         edtName.setText(name);
