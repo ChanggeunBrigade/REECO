@@ -17,7 +17,7 @@
 
         <activity android:name=".ServerAddActivity" />
         <activity android:name=".CodeWriteActivity" />
-        <activity android:name=".CompileResultAcitivity" />
+        <activity android:name=".CompileResultActivity" />
         <activity android:name=".SplashActivity"
             android:exported="true" android:theme="@style/SplashTheme">
             <intent-filter>

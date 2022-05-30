@@ -26,7 +26,7 @@ public class CodeWriteActivity extends AppCompatActivity {
         Button btnCompile = findViewById(R.id.btn_compile);
 
         btnCompile.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), CompileResultAcitivity.class);
+            Intent intent = new Intent(getApplicationContext(), CompileResultActivity.class);
 
             startActivity(intent);
         });
