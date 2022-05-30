@@ -18,7 +18,7 @@
     <GridView
         android:id="@+id/grid_test"
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="420dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
         android:horizontalSpacing="20dp"
@@ -43,6 +43,7 @@
 
         <android.widget.Button
             android:id="@+id/btn_server_add"
+            android:minHeight="50dp"
             style="@style/CustomButtonBlueStyle"
             android:text="서버 추가" />
 

@@ -21,6 +21,7 @@
     <style name="CustomButtonBlueStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/shape_rectangle_nostroke_bluecolor</item>
         <item name="android:foreground">?selectableItemBackground</item>
         <item name="android:fontFamily">@font/semibold</item>
@@ -45,6 +46,7 @@
     <style name="CustomButtonGrayStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/shape_rectangle_nostroke_graycolor</item>
         <item name="android:foreground">?selectableItemBackground</item>
         <item name="android:fontFamily">@font/semibold</item>
@@ -57,6 +59,7 @@
     <style name="CustomButtonWhiteStrokeStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/shape_rectangle_with_stroke</item>
         <item name="android:foreground">?selectableItemBackground</item>
         <item name="android:fontFamily">@font/medium</item>
@@ -90,6 +93,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">53dp</item>
         <item name="android:background">@drawable/edittext_rectangle_with_stroke</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:padding">15dp</item>
         <item name="android:fontFamily">@font/regular</item>
