@@ -1,5 +1,6 @@
 package com.example.reeco;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -27,8 +28,8 @@ public interface ServerDao {
     void delete(Server server);
 
     @Query("SELECT * FROM servers")
-    List<Server> getServers();
+    LiveData<List<Server>> getServers();
 
     @Query("SELECT * FROM servers where name = :name")
-    List<Server> findServersByName(String name);
+    Server findServerByName(String name);
 }

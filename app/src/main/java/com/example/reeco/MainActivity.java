@@ -14,11 +14,17 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.LiveData;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mDialog.setContentView(R.layout.custom_dialog);
 
         AppDatabase db = AppDatabase.getInstance(this);
-        List<Server> servers = db.serverDao().getServers();
+        
 
         for(int i = 0; i < servers.size(); i++) {
             gridAdt.setItem(servers.get(i).getName());
