@@ -2,18 +2,15 @@ package com.example.reeco;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GridAdapter extends BaseAdapter {
 
@@ -23,6 +20,15 @@ public class GridAdapter extends BaseAdapter {
     public GridAdapter(Context context) {
         this.m_context = context;
         this.m_array_item = new ArrayList<GridItem>();
+    }
+
+    public GridAdapter(Context context, List<Server> servers) {
+        this.m_context = context;
+
+        m_array_item = new ArrayList<>();
+        for (int i = 0; i < servers.size(); i++) {
+            m_array_item.add(new GridItem(servers.get(i).getName()));
+        }
     }
 
     @Override
