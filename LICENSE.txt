@@ -1,10 +1,8 @@
 REECO includes library that was written by Trilead
-and library that was written by kbiakov
+and library that was written by Amr Hesham
 The license states the following:
 
-MIT License
-
-Copyright (c) 2016 Kirill Biakov
+Copyright (c) 2020 - Present Amr Hesham
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
