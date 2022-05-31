@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -12,7 +11,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Objects;
+
 public class CodeWriteActivity extends AppCompatActivity {
+    EditText edtCodeWrite;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +27,10 @@ public class CodeWriteActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_code_compile);
 
-        EditText EdtcodeWrite = findViewById(R.id.edt_codeWrite);
         Button btnOpenFile = findViewById(R.id.btn_openFile);
         Button btnSaveFile = findViewById(R.id.btn_saveFile);
         Button btnCompile = findViewById(R.id.btn_compile);
+        edtCodeWrite = findViewById(R.id.edt_codeWrite);
 
         btnCompile.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), CompileResultActivity.class);
@@ -36,10 +43,6 @@ public class CodeWriteActivity extends AppCompatActivity {
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("text/*");
             startActivityForResult(intent, 1);
-
-            String data = intent.getStringExtra("data");
-            System.out.println(data);
-            EdtcodeWrite.setText(data);
         });
     }
 
@@ -47,13 +50,34 @@ public class CodeWriteActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                Uri uri = data.getData();
-                Log.e("uri", uri.toString());
-                Intent intent = new Intent("data", uri);
-                intent.putExtra("data", uri);
-            }
+        if (requestCode != 1 || resultCode != Activity.RESULT_OK) {
+            return;
         }
+        if (data == null) {
+            return;
+        }
+
+        Uri uri = data.getData();
+
+        try {
+            edtCodeWrite.setText(readTextFromUri(uri));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String readTextFromUri(Uri uri) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (InputStream inputStream =
+                     getContentResolver().openInputStream(uri);
+             BufferedReader reader = new BufferedReader(
+                     new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
+        return stringBuilder.toString();
     }
 }
