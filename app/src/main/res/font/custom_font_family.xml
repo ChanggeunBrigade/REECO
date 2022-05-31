@@ -32,4 +32,11 @@
         app:font="@font/bold"
         app:fontStyle="normal" />
 
+    <!-- hack 폰트 -->
+    <font
+        android:font="@font/Hack"
+        android:fontStyle="normal"
+        app:font="@font/Hack"
+        app:fontstyle="normal" />
+
 </font-family>
