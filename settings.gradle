@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "REECO"
 include ':app'
-include ':codeview'

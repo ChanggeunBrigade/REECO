@@ -4,12 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.amrdeveloper.codeview.CodeView;
+import com.example.reeco.syntax.LanguageManager;
+import com.example.reeco.syntax.LanguageName;
+import com.example.reeco.syntax.ThemeName;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +23,7 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class CodeWriteActivity extends AppCompatActivity {
-    EditText edtCodeWrite;
+    CodeView edtCodeWrite;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +63,25 @@ public class CodeWriteActivity extends AppCompatActivity {
         }
 
         Uri uri = data.getData();
+
+        LanguageManager langManager = new LanguageManager(this, edtCodeWrite);
+
+        String[] split = uri.getPath().split("[.]");
+        String fileExt = split[split.length - 1];
+
+        Log.e("file", fileExt);
+
+        switch (fileExt) {
+            case "java":
+                langManager.applyTheme(LanguageName.JAVA, ThemeName.WHITE);
+                break;
+            case "py":
+                langManager.applyTheme(LanguageName.PYTHON, ThemeName.WHITE);
+                break;
+            case "go":
+                langManager.applyTheme(LanguageName.GO_LANG, ThemeName.WHITE);
+                break;
+        }
 
         try {
             edtCodeWrite.setText(readTextFromUri(uri));

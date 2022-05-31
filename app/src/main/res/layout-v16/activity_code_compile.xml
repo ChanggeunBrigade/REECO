@@ -5,17 +5,20 @@
     android:layout_margin="20dp"
     android:orientation="vertical">
 
-    <EditText
+    <com.amrdeveloper.codeview.CodeView
         android:id="@+id/edt_codeWrite"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        android:padding="15dp"
-        android:textSize="15dp"
         android:layout_marginBottom="10dp"
-        android:gravity="top"
         android:background="@drawable/shape_rectangle_with_stroke"
+        android:dropDownWidth="150dp"
+        android:dropDownHorizontalOffset="0dp"
+        android:dropDownSelector="@color/black"
         android:fontFamily="@font/hack"
-        android:hint="내용을 입력하세요" />
+        android:gravity="top"
+        android:padding="15dp"
+        android:scrollHorizontally="true"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,22 +31,19 @@
             style="@style/CustomButtonWhiteStrokeStyle"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="파일 열기"
-            />
+            android:text="파일 열기" />
 
         <android.widget.Button
             android:id="@+id/btn_saveFile"
             style="@style/CustomButtonWhiteStrokeStyle"
             android:layout_weight="1"
-            android:text="파일 저장"
-            />
+            android:text="파일 저장" />
     </LinearLayout>
 
     <android.widget.Button
         android:id="@+id/btn_compile"
         style="@style/CustomButtonWhiteStrokeStyle"
         android:layout_weight="1"
-        android:text="컴파일"
-        />
+        android:text="컴파일" />
 
 </LinearLayout>
