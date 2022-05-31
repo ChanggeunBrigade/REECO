@@ -14,7 +14,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="top"
         android:background="@drawable/shape_rectangle_with_stroke"
-        android:fontFamily="@font/regular"
+        android:fontFamily="@font/hack"
         android:hint="내용을 입력하세요" />
 
     <LinearLayout
