@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -68,8 +67,6 @@ public class CodeWriteActivity extends AppCompatActivity {
 
         String[] split = uri.getPath().split("[.]");
         String fileExt = split[split.length - 1];
-
-        Log.e("file", fileExt);
 
         switch (fileExt) {
             case "java":
