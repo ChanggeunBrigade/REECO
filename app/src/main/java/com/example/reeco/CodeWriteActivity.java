@@ -18,13 +18,18 @@ import com.example.reeco.syntax.LanguageName;
 import com.example.reeco.syntax.ThemeName;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Objects;
 
 public class CodeWriteActivity extends AppCompatActivity {
     CodeView edtCodeWrite;
+    Uri uri;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -52,6 +57,25 @@ public class CodeWriteActivity extends AppCompatActivity {
             //noinspection deprecation
             startActivityForResult(intent, 1);
         });
+
+        // virtual device에서는 제대로 저장이 되지 않는 경우가 존재하나,
+        // 실제 디바이스에서 정상적으로 작동하는 것으로 확인됨.
+        btnSaveFile.setOnClickListener(v -> {
+            if (uri == null) {
+                return;
+            }
+
+            try {
+                OutputStream outputStream = getContentResolver().openOutputStream(uri);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                        Objects.requireNonNull(outputStream)));
+                writer.write(edtCodeWrite.getText().toString());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -65,7 +89,7 @@ public class CodeWriteActivity extends AppCompatActivity {
             return;
         }
 
-        Uri uri = data.getData();
+        uri = data.getData();
 
         LanguageManager langManager = new LanguageManager(this, edtCodeWrite);
 
