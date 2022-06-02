@@ -3,13 +3,10 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion buildTools
 
     defaultConfig {
         minSdkVersion minSdk
         targetSdkVersion compileSdk
-        versionCode 1
-        versionName '1.3.2'
     }
     buildTypes {
         release {
@@ -17,7 +14,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    lintOptions {
+    lint {
         abortOnError false
     }
 }
