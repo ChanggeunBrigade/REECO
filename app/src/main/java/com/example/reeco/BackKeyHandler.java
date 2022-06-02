@@ -30,6 +30,7 @@ public class BackKeyHandler {
         toast.show();
     }
 
+    @SuppressWarnings("unused")
     private void showGuide(String msg) {
         toast = Toast.makeText(activity, msg, Toast.LENGTH_SHORT);
         toast.show();

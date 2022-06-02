@@ -9,12 +9,12 @@
 
     <TextView
         style="@style/CustomTextViewTitleStyle"
-        android:id="@+id/TitletextView"
+        android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="서버를 삭제하시겠습니까?"
-        android:textSize="18dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:text="@string/ask_server_delete"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,11 +25,12 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_marginTop="13.5dp"
+            android:contentDescription="warning"
             android:src="@drawable/warning" />
 
         <TextView
             style="@style/CustomTextViewStyle"
-            android:id="@+id/dialogtextView1"
+            android:id="@+id/dialogTextView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="지금 삭제한 정보는 다시 복구되지 않습니다."

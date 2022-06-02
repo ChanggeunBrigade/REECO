@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("SameReturnValue")
 public class GoLanguage {
 
     //Language Keywords
@@ -23,7 +24,7 @@ public class GoLanguage {
             "string|true|false|new|nil|byte|bool|int|int8|int16|int32|int64)\\b");
 
     //Brackets and Colons
-    private static final Pattern PATTERN_BUILTINS = Pattern.compile("[,:;[->]{}()]");
+    private static final Pattern PATTERN_BUILTINS = Pattern.compile("[,:;->{}()]");
 
     //Data
     private static final Pattern PATTERN_NUMBERS = Pattern.compile("\\b(\\d*[.]?\\d+)\\b");
@@ -33,7 +34,7 @@ public class GoLanguage {
     private static final Pattern PATTERN_SINGLE_LINE_COMMENT = Pattern.compile("//[^\\n]*");
     private static final Pattern PATTERN_MULTI_LINE_COMMENT = Pattern.compile("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/");
     private static final Pattern PATTERN_ATTRIBUTE = Pattern.compile("\\.[a-zA-Z0-9_]+");
-    private static final Pattern PATTERN_OPERATION = Pattern.compile(":|==|>|<|!=|>=|<=|->|=|>|<|%|-|-=|%=|\\+|\\-|\\-=|\\+=|\\^|\\&|\\|::|\\?|\\*");
+    private static final Pattern PATTERN_OPERATION = Pattern.compile(":|==|>|<|!=|>=|<=|->|=|%|-|-=|%=|\\+|\\+=|\\^|&|\\|::|\\?|\\*");
 
     public static void applyWhiteTheme(Context context, CodeView codeView) {
         codeView.resetSyntaxPatternList();

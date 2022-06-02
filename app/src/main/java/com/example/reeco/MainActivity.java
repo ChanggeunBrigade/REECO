@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
-        gridList = (GridView) findViewById(R.id.grid_test);
+        gridList = findViewById(R.id.grid_test);
         GridAdapter gridAdt = new GridAdapter(this);
 
         Dialog mDialog = new Dialog(MainActivity.this);

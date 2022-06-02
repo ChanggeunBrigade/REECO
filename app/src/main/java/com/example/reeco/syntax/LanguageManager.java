@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class LanguageManager {
 
     private final Context context;
@@ -22,7 +23,7 @@ public class LanguageManager {
 
     public void applyTheme(LanguageName language, ThemeName theme) {
         if (theme == ThemeName.WHITE) {
-            applyNoctisWhiteTheme(language);
+            applyWhiteTheme(language);
         }
     }
 
@@ -104,7 +105,7 @@ public class LanguageManager {
         }
     }
 
-    private void applyNoctisWhiteTheme(LanguageName language) {
+    private void applyWhiteTheme(LanguageName language) {
         switch (language) {
             case JAVA:
                 JavaLanguage.applyWhiteTheme(context, codeView);

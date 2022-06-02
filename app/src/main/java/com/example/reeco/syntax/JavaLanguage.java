@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("SameReturnValue")
 public class JavaLanguage {
 
     //Language Keywords
@@ -25,11 +26,11 @@ public class JavaLanguage {
             "|public|return|short|static|strictfp|super|switch" +
             "|synchronized|this|throw|transient|try|void|volatile|while)\\b");
 
-    private static final Pattern PATTERN_BUILTINS = Pattern.compile("[,:;[->]{}()]");
+    private static final Pattern PATTERN_BUILTINS = Pattern.compile("[,:;->{}()]");
     private static final Pattern PATTERN_SINGLE_LINE_COMMENT = Pattern.compile("//[^\\n]*");
     private static final Pattern PATTERN_MULTI_LINE_COMMENT = Pattern.compile("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/");
     private static final Pattern PATTERN_ATTRIBUTE = Pattern.compile("\\.[a-zA-Z0-9_]+");
-    private static final Pattern PATTERN_OPERATION = Pattern.compile(":|==|>|<|!=|>=|<=|->|=|>|<|%|-|-=|%=|\\+|\\-|\\-=|\\+=|\\^|\\&|\\|::|\\?|\\*");
+    private static final Pattern PATTERN_OPERATION = Pattern.compile(":|==|>|<|!=|>=|<=|->|=|%|-|-=|%=|\\+|\\+=|\\^|&|\\|::|\\?|\\*");
     private static final Pattern PATTERN_GENERIC = Pattern.compile("<[a-zA-Z0-9,<>]+>");
     private static final Pattern PATTERN_ANNOTATION = Pattern.compile("@.[a-zA-Z0-9]+");
     private static final Pattern PATTERN_TODO_COMMENT = Pattern.compile("//TODO[^\n]*");

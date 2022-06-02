@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Index;
 
+@SuppressWarnings("unused")
 @Entity(tableName = "servers", primaryKeys = {"ip", "port"},
         indices = {@Index(value = "name", unique = true)})
 public class Server {

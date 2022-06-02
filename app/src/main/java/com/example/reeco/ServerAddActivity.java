@@ -27,8 +27,6 @@ public class ServerAddActivity extends AppCompatActivity {
         String user = "";
         String password = "";
 
-        final boolean[] is_valid = {false};
-
         if (extras != null) {
             name = extras.getString("name", "");
             ip = extras.getString("ip", "");
@@ -42,7 +40,7 @@ public class ServerAddActivity extends AppCompatActivity {
         EditText edtPort = findViewById(R.id.edt_port_num);
         EditText edtUser = findViewById(R.id.edt_user_name);
         EditText edtPassword = findViewById(R.id.edt_password);
-        EditText edtexecuteCom = findViewById(R.id.edt_execute_compiler);
+        EditText edtExecuteCom = findViewById(R.id.edt_execute_compiler);
         Button btnServerAdd = findViewById(R.id.btn_server_confirm);
 
 
@@ -62,7 +60,7 @@ public class ServerAddActivity extends AppCompatActivity {
                     || edtPort.getText().toString().replace(" ", "").equals("")
                     || edtUser.getText().toString().replace(" ", "").equals("")
                     || edtPassword.getText().toString().replace(" ", "").equals("")
-                    || edtexecuteCom.getText().toString().replace(" ", "").equals("")) {
+                    || edtExecuteCom.getText().toString().replace(" ", "").equals("")) {
                 if (edtName.getText().toString().replace(" ", "").equals("")) {
                     edtName.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
                 }
@@ -79,8 +77,8 @@ public class ServerAddActivity extends AppCompatActivity {
                     edtPassword.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
                 }
 
-                if (edtexecuteCom.getText().toString().replace(" ", "").equals("")) {
-                    edtexecuteCom.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                if (edtExecuteCom.getText().toString().replace(" ", "").equals("")) {
+                    edtExecuteCom.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
                 }
 
                 Toast.makeText(this, "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();

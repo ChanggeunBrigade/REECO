@@ -19,9 +19,10 @@ public class GridAdapter extends BaseAdapter {
 
     public GridAdapter(Context context) {
         this.m_context = context;
-        this.m_array_item = new ArrayList<GridItem>();
+        this.m_array_item = new ArrayList<>();
     }
 
+    @SuppressWarnings("unused")
     public GridAdapter(Context context, List<Server> servers) {
         this.m_context = context;
 
@@ -61,7 +62,6 @@ public class GridAdapter extends BaseAdapter {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             m_context.startActivity(intent);
-            return;
         });
 
         button.setOnLongClickListener(view -> false);
@@ -69,9 +69,9 @@ public class GridAdapter extends BaseAdapter {
         return convertView;
     }
 
+    @SuppressWarnings("unused")
     public void setItem(String strItem) {
-        String strGet = strItem;
-        this.m_array_item.add(new GridItem(strGet));
+        this.m_array_item.add(new GridItem(strItem));
     }
 
     public String getItemString(int position) {

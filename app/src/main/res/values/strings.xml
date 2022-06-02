@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">REECO</string>
+    <string name="ask_server_delete">서버를 삭제하시겠습니까?</string>
+    <string name="reeco_splash_display">REECO splash display</string>
 </resources>

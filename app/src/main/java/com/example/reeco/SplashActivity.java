@@ -18,6 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         moveMain(2);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void moveMain(int sec) {
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("SameReturnValue")
 public class PythonLanguage {
 
     //Language Keywords
@@ -23,7 +24,7 @@ public class PythonLanguage {
             "|with|async|elif|if|or|yield)\\b");
 
     //Brackets and Colons
-    private static final Pattern PATTERN_BUILTINS = Pattern.compile("[,:;[->]{}()]");
+    private static final Pattern PATTERN_BUILTINS = Pattern.compile("[,:;->{}()]");
 
     //Data
     private static final Pattern PATTERN_NUMBERS = Pattern.compile("\\b(\\d*[.]?\\d+)\\b");
@@ -32,7 +33,7 @@ public class PythonLanguage {
     private static final Pattern PATTERN_HEX = Pattern.compile("0x[0-9a-fA-F]+");
     private static final Pattern PATTERN_TODO_COMMENT = Pattern.compile("#TODO[^\n]*");
     private static final Pattern PATTERN_ATTRIBUTE = Pattern.compile("\\.[a-zA-Z0-9_]+");
-    private static final Pattern PATTERN_OPERATION = Pattern.compile(":|==|>|<|!=|>=|<=|->|=|>|<|%|-|-=|%=|\\+|\\-|\\-=|\\+=|\\^|\\&|\\|::|\\?|\\*");
+    private static final Pattern PATTERN_OPERATION = Pattern.compile(":|==|>|<|!=|>=|<=|->|=|%|-|-=|%=|\\+|\\+=|\\^|&|\\|::|\\?|\\*");
     private static final Pattern PATTERN_HASH_COMMENT = Pattern.compile("#(?!TODO )[^\\n]*");
 
     public static void applyWhiteTheme(Context context, CodeView codeView) {
