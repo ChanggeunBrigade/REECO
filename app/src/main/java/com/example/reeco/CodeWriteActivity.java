@@ -44,8 +44,20 @@ public class CodeWriteActivity extends AppCompatActivity {
         Button btnCompile = findViewById(R.id.btn_compile);
         edtCodeWrite = findViewById(R.id.edt_codeWrite);
 
+        Intent receivedIntent = getIntent();
+
+        String ip = receivedIntent.getStringExtra("ip");
+        int port = receivedIntent.getIntExtra("port", 0);
+        String user = receivedIntent.getStringExtra("user");
+        String password = receivedIntent.getStringExtra("password");
+
         btnCompile.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), CompileResultActivity.class);
+
+            intent.putExtra("ip", ip);
+            intent.putExtra("port", port);
+            intent.putExtra("user", user);
+            intent.putExtra("password", password);
 
             startActivity(intent);
         });
