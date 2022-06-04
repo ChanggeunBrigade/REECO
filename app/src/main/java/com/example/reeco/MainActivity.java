@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
 
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, MODE_PRIVATE);
 
         gridList = findViewById(R.id.grid_test);
         GridAdapter gridAdt = new GridAdapter(this);
@@ -44,20 +43,6 @@ public class MainActivity extends AppCompatActivity {
             gridAdt.clear();
             gridAdt.setAllItems(servers);
             gridList.setAdapter(gridAdt);
-
-            gridList.setOnItemClickListener((adapterView, view, position, id) -> {
-                Server server = servers.get(position);
-                Intent intent = new Intent(getApplicationContext(), CodeWriteActivity.class);
-
-                intent.putExtra("ip", server.getIp());
-                intent.putExtra("port", server.getPort());
-                intent.putExtra("user", server.getUser());
-                intent.putExtra("password", server.getPassword());
-
-                Toast.makeText(getApplicationContext(), "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();
-
-                startActivity(intent);
-            });
 
             gridList.setOnItemLongClickListener((adapterView, view, position, id) -> {
                 CustomDialog dlg = new CustomDialog(MainActivity.this, gridAdt.getItemString(position));

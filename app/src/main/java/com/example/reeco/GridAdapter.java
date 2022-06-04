@@ -57,9 +57,16 @@ public class GridAdapter extends BaseAdapter {
         TextView textView = convertView.findViewById(R.id.item_textview);
         textView.setText(m_array_item.get(position).getItemString());
 
+        String name = m_array_item.get(position).getItemString();
+        Server server = AppDatabase.getInstance(m_context).serverDao().findServerByName(name);
+
         button.setOnClickListener(view -> {
             Intent intent = new Intent(m_context, CodeWriteActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("ip", server.getIp());
+            intent.putExtra("port", server.getPort());
+            intent.putExtra("user", server.getUser());
+            intent.putExtra("password", server.getPassword());
 
             m_context.startActivity(intent);
         });
