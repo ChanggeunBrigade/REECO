@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.JSch;
@@ -21,6 +23,8 @@ public class CompileResultActivity extends AppCompatActivity {
     int port;
     String user;
     String password;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

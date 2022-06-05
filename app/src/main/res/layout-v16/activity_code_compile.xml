@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             style="@style/CustomTextViewTitleStyle"
@@ -16,27 +16,26 @@
             android:fontFamily="@font/medium"
             android:layout_gravity="center"
             android:textSize="18sp"
-            android:text="Open Your Source Code" />
+            android:text="Select File" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/codeScroll"
-            android:background="@drawable/shape_rectangle_with_stroke">
+            android:background="@drawable/shape_rectangle">
             <com.amrdeveloper.codeview.CodeView
                 android:id="@+id/edt_codeWrite"
-                android:layout_width="wrap_content"
-                android:layout_height="520dp"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:dropDownWidth="150dp"
                 android:dropDownHorizontalOffset="0dp"
@@ -45,19 +44,28 @@
                 android:gravity="top"
                 android:hint=""
                 android:inputType="textMultiLine"
-                android:padding="15dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="15dp"
                 android:textSize="15sp"
                 tools:ignore="SpeakableTextPresentCheck" />
         </HorizontalScrollView>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <android.widget.Button
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:id="@+id/btn_compile"
             android:layout_height="50dp"
             style="@style/CustomButtonBlueStyle"
-            android:layout_weight="1"
             android:text="컴파일" />
 
     </LinearLayout>
-
 </LinearLayout>

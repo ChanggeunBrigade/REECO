@@ -4,50 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        style="@style/CustomTextViewTitleStyle"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:text="서버 선택" />
-
-    <GridView
-        android:id="@+id/grid_test"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
-        android:horizontalSpacing="20dp"
-        android:numColumns="3"
-        android:scrollbarSize="5dp"
-        android:scrollbarStyle="insideInset"
-        android:scrollbarThumbVertical="@color/gray"
-        android:scrollbarTrackVertical="@color/white"
-        android:verticalScrollbarPosition="right"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="30dp"
+        android:orientation="vertical">
 
-        android:verticalSpacing="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            style="@style/CustomTextViewTitleStyle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:textSize="35sp"
+            android:text="서버 선택" />
+
+
+        <GridView
+            android:id="@+id/grid_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:horizontalSpacing="20dp"
+            android:numColumns="3"
+            android:scrollbarSize="5dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbarThumbVertical="@color/gray"
+            android:scrollbarTrackVertical="@color/white"
+            android:verticalScrollbarPosition="right"
+
+            android:verticalSpacing="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <android.widget.Button
             android:id="@+id/btn_server_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
             android:minHeight="50dp"
             style="@style/CustomButtonBlueStyle"
             android:text="서버 추가" />
 
     </LinearLayout>
+
 
 
 </LinearLayout>

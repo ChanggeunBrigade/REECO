@@ -12,108 +12,104 @@
 
         <TextView
             style="@style/CustomTextViewTitleStyle"
-            android:layout_gravity="center"
             android:fontFamily="@font/semibold"
-            android:text="서버 정보 추가"
-            android:textSize="20sp" />
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="서버 정보 추가" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rectangle">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="25dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvServerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/medium"
-                android:text="서버 이름"
+                android:textSize="14sp"
                 android:textColor="#494949"
-                android:textSize="14sp" />
+                android:text="서버 이름" />
 
             <EditText
                 android:id="@+id/edt_server_name"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
-                android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/tvIp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/medium"
-                android:text="IP 주소"
+                android:textSize="14sp"
                 android:textColor="#494949"
-                android:textSize="14sp" />
+                android:text="IP 주소" />
 
             <EditText
                 android:id="@+id/edt_ip_addr"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
-                android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/tvPortNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/medium"
-                android:text="포트 번호"
+                android:textSize="14sp"
                 android:textColor="#494949"
-                android:textSize="14sp" />
+                android:text="포트 번호" />
 
             <EditText
                 android:id="@+id/edt_port_num"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
-                android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/tvUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/medium"
-                android:text="사용자 이름"
+                android:textSize="14sp"
                 android:textColor="#494949"
-                android:textSize="14sp" />
+                android:text="사용자 이름" />
 
             <EditText
                 android:id="@+id/edt_user_name"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
-                android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/tvPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/medium"
-                android:text="비밀번호"
+                android:textSize="14sp"
                 android:textColor="#494949"
-                android:textSize="14sp" />
+                android:text="비밀번호" />
 
             <EditText
                 android:id="@+id/edt_password"
@@ -126,28 +122,27 @@
                 android:id="@+id/tvCompiler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/medium"
-                android:text="컴파일러"
+                android:textSize="14sp"
                 android:textColor="#494949"
-                android:textSize="14sp" />
+                android:text="컴파일러" />
 
             <EditText
                 android:id="@+id/edt_execute_compiler"
                 style="@style/CustomEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
                 android:hint="실행할 컴파일러 입력"
-                android:inputType="text" />
+                android:layout_marginBottom="40dp" />
 
             <android.widget.Button
-                android:id="@+id/btn_server_confirm"
                 style="@style/CustomButtonBlueStyle"
+                android:id="@+id/btn_server_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="60dp"
                 android:text="서버 추가" />
         </LinearLayout>
 

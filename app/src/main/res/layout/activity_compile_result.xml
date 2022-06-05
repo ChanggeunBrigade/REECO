@@ -2,26 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/resultText"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_marginBottom="10dp"
-        android:autofillHints=""
-        android:background="@drawable/shape_rectangle_with_stroke"
-        android:fontFamily="@font/regular"
-        android:gravity="top"
-        android:padding="15dp"
-        android:text="Hello World!"
-        android:textSize="15sp" />
 
-    <android.widget.Button
-        android:id="@+id/btnExit"
-        style="@style/CustomButtonBlueStyle"
-        android:layout_weight="1"
-        android:text="닫기" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/resultText"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints=""
+            android:background="@drawable/shape_rectangle_with_stroke"
+            android:fontFamily="@font/regular"
+            android:gravity="top"
+            android:padding="15dp"
+            android:text="Hello World!"
+            android:textSize="15sp" />
+
+        <android.widget.Button
+            android:id="@+id/btnExit"
+            style="@style/CustomButtonBlueStyle"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="닫기" />
+
+    </LinearLayout>
 
 </LinearLayout>
