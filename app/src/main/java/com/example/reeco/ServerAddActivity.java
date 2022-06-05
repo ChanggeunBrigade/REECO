@@ -14,13 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.Objects;
-
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -80,34 +73,36 @@ public class ServerAddActivity extends AppCompatActivity {
         AppDatabase database = AppDatabase.getInstance(this);
 
         btnServerAdd.setOnClickListener(v -> {
-            if (edtName.getText().toString().replace(" ", "").equals("")
-                    || edtIp.getText().toString().replace(" ", "").equals("")
-                    || !edtIp.getText().toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")
-                    || edtPort.getText().toString().replace(" ", "").equals("")
-                    || edtUser.getText().toString().replace(" ", "").equals("")
-                    || edtPassword.getText().toString().replace(" ", "").equals("")
-                    || edtExecuteCom.getText().toString().replace(" ", "").equals("")) {
-                if (edtName.getText().toString().replace(" ", "").equals("")) {
-                    edtName.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
-                }
-                if (edtIp.getText().toString().replace(" ", "").equals("") ||
-                        !edtIp.getText().toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
-                    edtIp.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
-                }
-                if (edtPort.getText().toString().replace(" ", "").equals("")) {
-                    edtPort.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
-                }
-                if (edtUser.getText().toString().replace(" ", "").equals("")) {
-                    edtUser.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
-                }
-                if (edtPassword.getText().toString().replace(" ", "").equals("")) {
-                    edtPassword.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
-                }
+            boolean isValid = true;
 
-                if (edtExecuteCom.getText().toString().replace(" ", "").equals("")) {
-                    edtExecuteCom.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
-                }
+            if (edtName.getText().toString().replace(" ", "").equals("")) {
+                edtName.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                isValid = false;
+            }
+            if (edtIp.getText().toString().replace(" ", "").equals("") ||
+                    !edtIp.getText().toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
+                edtIp.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                isValid = false;
+            }
+            if (edtPort.getText().toString().replace(" ", "").equals("")) {
+                edtPort.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                isValid = false;
+            }
+            if (edtUser.getText().toString().replace(" ", "").equals("")) {
+                edtUser.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                isValid = false;
+            }
+            if (edtPassword.getText().toString().replace(" ", "").equals("")) {
+                edtPassword.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                isValid = false;
+            }
 
+            if (edtExecuteCom.getText().toString().replace(" ", "").equals("")) {
+                edtExecuteCom.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                isValid = false;
+            }
+
+            if (!isValid) {
                 Toast.makeText(this, "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();
                 return;
             }
