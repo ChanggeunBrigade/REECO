@@ -10,13 +10,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.trilead.ssh2.Connection;
-import com.trilead.ssh2.Session;
-
-import java.io.IOException;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
 
 public class CompileResultActivity extends AppCompatActivity {
     Session session;
+    String ip;
+    int port;
+    String user;
+    String password;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,35 +31,39 @@ public class CompileResultActivity extends AppCompatActivity {
 
         Intent receivedIntent = getIntent();
 
-        String ip = receivedIntent.getStringExtra("ip");
-        int port = receivedIntent.getIntExtra("port", 0);
-        String user = receivedIntent.getStringExtra("user");
-        String password = receivedIntent.getStringExtra("password");
+        ip = receivedIntent.getStringExtra("ip");
+        port = receivedIntent.getIntExtra("port", 0);
+        user = receivedIntent.getStringExtra("user");
+        password = receivedIntent.getStringExtra("password");
 
         Button btnExit = findViewById(R.id.btnExit);
 
         btnExit.setOnClickListener(view -> finish());
-
-        Connection connection = new Connection(ip, port);
-        try { // TODO: java.util.concurrent 모듈 이용해서 짜기. 메인스레드에서 돌리면 오류남.
-            connection.connect();
-            connection.authenticateWithPassword(user, password);
-            session = connection.openSession();
-        } catch (IOException e) {
-            Toast.makeText(this, "연결이 되지 않습니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        connection.close();
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (session == null) {
+        if (session == null || !session.isConnected()) {
             return true;
         }
 
         Toast.makeText(this, KeyEvent.keyCodeToString(keyCode), Toast.LENGTH_SHORT).show();
 
         return true;
+    }
+
+    private void sendFile(String path, String dest) throws JSchException {
+        if (session == null || !session.isConnected()) {
+            Toast.makeText(this, "연결 오류입니다.", Toast.LENGTH_SHORT).show();
+        }
+
+        Channel channel = session.openChannel("sftp");
+
+    }
+
+    private void connectSSH() throws JSchException {
+        session = new JSch().getSession(user, ip, port);
+        session.setPassword(password);
+        session.connect();
     }
 }
