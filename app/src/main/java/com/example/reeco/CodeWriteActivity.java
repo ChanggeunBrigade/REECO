@@ -2,10 +2,14 @@ package com.example.reeco;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -29,6 +33,7 @@ import java.util.Objects;
 
 public class CodeWriteActivity extends AppCompatActivity {
     CodeView edtCodeWrite;
+    TextView txtFilename;
     Uri uri;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -42,6 +47,8 @@ public class CodeWriteActivity extends AppCompatActivity {
         Button btnOpenFile = findViewById(R.id.btn_openFile);
         Button btnSaveFile = findViewById(R.id.btn_saveFile);
         Button btnCompile = findViewById(R.id.btn_compile);
+
+        txtFilename = findViewById(R.id.txtFilename);
         edtCodeWrite = findViewById(R.id.edt_codeWrite);
 
         Intent receivedIntent = getIntent();
@@ -82,6 +89,7 @@ public class CodeWriteActivity extends AppCompatActivity {
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                         Objects.requireNonNull(outputStream)));
                 writer.write(edtCodeWrite.getText().toString());
+                Toast.makeText(CodeWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -102,6 +110,14 @@ public class CodeWriteActivity extends AppCompatActivity {
         }
 
         uri = data.getData();
+
+        Cursor returnCursor = getContentResolver().query(uri, null, null, null, null);
+
+        int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        returnCursor.moveToFirst();
+
+        txtFilename.setText(returnCursor.getString(nameIndex));
+
 
         LanguageManager langManager = new LanguageManager(this, edtCodeWrite);
 

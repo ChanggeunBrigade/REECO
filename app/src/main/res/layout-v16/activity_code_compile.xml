@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
     android:orientation="vertical">
+
+    <TextView
+        style="@style/CustomTextViewTitleStyle"
+        android:id="@+id/txtFilename"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/medium"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:text="Open Your Source Code" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -14,8 +25,8 @@
         <com.amrdeveloper.codeview.CodeView
             android:id="@+id/edt_codeWrite"
             android:layout_width="wrap_content"
-            android:layout_height="450dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="400dp"
+            android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:dropDownWidth="150dp"
             android:dropDownHorizontalOffset="0dp"
@@ -25,12 +36,14 @@
             android:hint="                                                                        "
             android:inputType="textMultiLine"
             android:padding="15dp"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:ignore="SpeakableTextPresentCheck" />
     </HorizontalScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
@@ -38,6 +51,7 @@
             android:id="@+id/btn_openFile"
             style="@style/CustomButtonWhiteStrokeStyle"
             android:layout_marginRight="10dp"
+            android:minHeight="50dp"
             android:layout_weight="1"
             android:text="파일 열기" />
 
@@ -45,11 +59,13 @@
             android:id="@+id/btn_saveFile"
             style="@style/CustomButtonWhiteStrokeStyle"
             android:layout_weight="1"
+            android:minHeight="50dp"
             android:text="파일 저장" />
     </LinearLayout>
 
     <android.widget.Button
         android:id="@+id/btn_compile"
+        android:layout_height="50dp"
         style="@style/CustomButtonWhiteStrokeStyle"
         android:layout_weight="1"
         android:text="컴파일" />

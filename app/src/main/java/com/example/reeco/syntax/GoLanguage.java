@@ -52,13 +52,13 @@ public class GoLanguage {
         codeView.addSyntaxPattern(PATTERN_NUMBERS, resources.getColor(R.color.purple_500));
         codeView.addSyntaxPattern(PATTERN_KEYWORDS, resources.getColor(R.color.pink));
         codeView.addSyntaxPattern(PATTERN_BUILTINS, resources.getColor(R.color.dark_blue));
-        codeView.addSyntaxPattern(PATTERN_SINGLE_LINE_COMMENT, resources.getColor(R.color.gray));
-        codeView.addSyntaxPattern(PATTERN_MULTI_LINE_COMMENT, resources.getColor(R.color.gray));
+        codeView.addSyntaxPattern(PATTERN_SINGLE_LINE_COMMENT, resources.getColor(R.color.comment_green));
+        codeView.addSyntaxPattern(PATTERN_MULTI_LINE_COMMENT, resources.getColor(R.color.comment_green));
         codeView.addSyntaxPattern(PATTERN_ATTRIBUTE, resources.getColor(R.color.blue));
         codeView.addSyntaxPattern(PATTERN_OPERATION, resources.getColor(R.color.pink));
 
         //Default Color
-        codeView.setTextColor(resources.getColor(R.color.orange));
+        codeView.setTextColor(resources.getColor(R.color.black));
 
         codeView.reHighlightSyntax();
     }

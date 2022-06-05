@@ -35,6 +35,7 @@ public class PythonLanguage {
     private static final Pattern PATTERN_ATTRIBUTE = Pattern.compile("\\.[a-zA-Z0-9_]+");
     private static final Pattern PATTERN_OPERATION = Pattern.compile(":|==|>|<|!=|>=|<=|->|=|%|-|-=|%=|\\+|\\+=|\\^|&|\\|::|\\?|\\*");
     private static final Pattern PATTERN_HASH_COMMENT = Pattern.compile("#(?!TODO )[^\\n]*");
+    private static final Pattern PATTERN_MULTILINE_COMMENT = Pattern.compile("[\"]{3}(.|\n)*[\"]{3}");
 
     public static void applyWhiteTheme(Context context, CodeView codeView) {
         codeView.resetSyntaxPatternList();
@@ -52,12 +53,12 @@ public class PythonLanguage {
         codeView.addSyntaxPattern(PATTERN_NUMBERS, resources.getColor(R.color.purple_500));
         codeView.addSyntaxPattern(PATTERN_KEYWORDS, resources.getColor(R.color.pink));
         codeView.addSyntaxPattern(PATTERN_BUILTINS, resources.getColor(R.color.dark_blue));
-        codeView.addSyntaxPattern(PATTERN_HASH_COMMENT, resources.getColor(R.color.gray));
+        codeView.addSyntaxPattern(PATTERN_HASH_COMMENT, resources.getColor(R.color.comment_green));
         codeView.addSyntaxPattern(PATTERN_ATTRIBUTE, resources.getColor(R.color.blue));
         codeView.addSyntaxPattern(PATTERN_OPERATION, resources.getColor(R.color.pink));
 
         //Default Color
-        codeView.setTextColor(resources.getColor(R.color.orange));
+        codeView.setTextColor(resources.getColor(R.color.black));
 
         codeView.addSyntaxPattern(PATTERN_TODO_COMMENT, resources.getColor(R.color.gold));
 
