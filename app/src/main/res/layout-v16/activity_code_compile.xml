@@ -34,7 +34,7 @@
             <com.amrdeveloper.codeview.CodeView
                 android:id="@+id/edt_codeWrite"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:dropDownWidth="150dp"
@@ -58,12 +58,9 @@
         android:orientation="horizontal">
 
         <android.widget.Button
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:id="@+id/btn_compile"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_rectangle_blue"
             style="@style/CustomButtonBlueStyle"
             android:text="컴파일" />
 
