@@ -26,10 +26,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -47,6 +47,8 @@
                 android:id="@+id/edt_server_name"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
+                android:singleLine="true"
+                android:scrollHorizontally="false"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
@@ -64,6 +66,8 @@
                 android:id="@+id/edt_ip_addr"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
+                android:singleLine="true"
+                android:scrollHorizontally="false"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
@@ -81,6 +85,8 @@
                 android:id="@+id/edt_port_num"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
+                android:singleLine="true"
+                android:scrollHorizontally="false"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
@@ -98,6 +104,8 @@
                 android:id="@+id/edt_user_name"
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
+                android:singleLine="true"
+                android:scrollHorizontally="false"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
@@ -116,6 +124,8 @@
                 style="@style/CustomEditTextStyle"
                 android:layout_marginBottom="20dp"
                 android:inputType="textPassword"
+                android:singleLine="true"
+                android:scrollHorizontally="false"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
@@ -134,6 +144,8 @@
                 style="@style/CustomEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:scrollHorizontally="false"
                 android:hint="실행할 컴파일러 입력"
                 android:layout_marginBottom="40dp" />
 
