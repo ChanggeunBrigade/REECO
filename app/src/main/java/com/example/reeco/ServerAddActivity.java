@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class ServerAddActivity extends AppCompatActivity {
 
     @Override
@@ -84,13 +87,16 @@ public class ServerAddActivity extends AppCompatActivity {
                 Toast.makeText(this, "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            database.serverDao().insertOrUpdate(new Server(
+
+            Observable<Integer> observable = Observable.just(1);
+            //noinspection ResultOfMethodCallIgnored
+            observable.subscribeOn(Schedulers.io()).subscribe(tmp -> database.serverDao().insertOrUpdate(new Server(
                     edtName.getText().toString(),
                     edtIp.getText().toString(),
                     Integer.parseInt(edtPort.getText().toString()),
                     edtUser.getText().toString(),
                     edtPassword.getText().toString()
-            ));
+            )));
 
             finish();
         });

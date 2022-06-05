@@ -12,6 +12,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class GridAdapter extends BaseAdapter {
 
     private final Context m_context;
@@ -57,19 +60,27 @@ public class GridAdapter extends BaseAdapter {
         TextView textView = convertView.findViewById(R.id.item_textview);
         textView.setText(m_array_item.get(position).getItemString());
 
-        String name = m_array_item.get(position).getItemString();
-        Server server = AppDatabase.getInstance(m_context).serverDao().findServerByName(name);
+        String positionName = m_array_item.get(position).getItemString();
 
-        button.setOnClickListener(view -> {
-            Intent intent = new Intent(m_context, CodeWriteActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("ip", server.getIp());
-            intent.putExtra("port", server.getPort());
-            intent.putExtra("user", server.getUser());
-            intent.putExtra("password", server.getPassword());
+        AppDatabase database = AppDatabase.getInstance(m_context);
 
-            m_context.startActivity(intent);
-        });
+        Observable<String> nameObservable = Observable.just(positionName);
+
+        //noinspection ResultOfMethodCallIgnored
+        nameObservable.subscribeOn(Schedulers.io()).subscribe(name -> {
+            Server server = database.serverDao().findServerByName(name);
+
+            button.setOnClickListener(view -> {
+                Intent intent = new Intent(m_context, CodeWriteActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("ip", server.getIp());
+                intent.putExtra("port", server.getPort());
+                intent.putExtra("user", server.getUser());
+                intent.putExtra("password", server.getPassword());
+
+                m_context.startActivity(intent);
+            });
+        }, Throwable::printStackTrace);
 
         button.setOnLongClickListener(view -> false);
 
