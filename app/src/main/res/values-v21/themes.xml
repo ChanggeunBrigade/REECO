@@ -35,6 +35,7 @@
     <style name="CustomButtonRedStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/shape_rectangle_nostroke_redcolor</item>
         <item name="android:foreground">?selectableItemBackground</item>
         <item name="android:fontFamily">@font/semibold</item>

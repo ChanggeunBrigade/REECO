@@ -16,4 +16,5 @@
     <color name="gold">#FFD700</color>
     <color name="comment_green">#679659</color>
     <color name="comment_brown">#C2947A</color>
+    <color name="transparent">#00000000</color>
 </resources>

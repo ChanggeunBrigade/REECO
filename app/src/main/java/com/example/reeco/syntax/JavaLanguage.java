@@ -47,7 +47,7 @@ public class JavaLanguage {
         Resources resources = context.getResources();
 
         //View Background
-        codeView.setBackgroundColor(resources.getColor(R.color.white));
+        codeView.setBackgroundColor(resources.getColor(R.color.transparent));
 
         //Syntax Colors
         codeView.addSyntaxPattern(PATTERN_HEX, resources.getColor(R.color.purple_500));
