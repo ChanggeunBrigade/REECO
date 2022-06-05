@@ -2,6 +2,7 @@ package com.example.reeco;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +72,51 @@ public class ServerAddActivity extends AppCompatActivity {
         edtPassword.setText(password);
 
         AppDatabase database = AppDatabase.getInstance(this);
+
+        edtName.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
+                edtIp.requestFocus();
+                return true;
+            }
+
+            return false;
+        });
+
+        edtIp.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
+                edtPort.requestFocus();
+                return true;
+            }
+
+            return false;
+        });
+
+        edtPort.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
+                edtUser.requestFocus();
+                return true;
+            }
+
+            return false;
+        });
+
+        edtUser.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
+                edtPassword.requestFocus();
+                return true;
+            }
+
+            return false;
+        });
+
+        edtPassword.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
+                edtExecuteCom.requestFocus();
+                return true;
+            }
+
+            return false;
+        });
 
         btnServerAdd.setOnClickListener(v -> {
             boolean isValid = true;
