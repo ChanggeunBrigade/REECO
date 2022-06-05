@@ -7,14 +7,20 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import com.amrdeveloper.codeview.CodeView;
 import com.example.reeco.syntax.LanguageManager;
@@ -35,6 +41,8 @@ public class CodeWriteActivity extends AppCompatActivity {
     CodeView edtCodeWrite;
     TextView txtFilename;
     Uri uri;
+    Toolbar toolbar;
+    ActionBar actionBar;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -44,8 +52,16 @@ public class CodeWriteActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_code_compile);
 
-        Button btnOpenFile = findViewById(R.id.btn_openFile);
-        Button btnSaveFile = findViewById(R.id.btn_saveFile);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Button btnCompile = findViewById(R.id.btn_compile);
 
         txtFilename = findViewById(R.id.txtFilename);
@@ -67,34 +83,6 @@ public class CodeWriteActivity extends AppCompatActivity {
             intent.putExtra("password", password);
 
             startActivity(intent);
-        });
-
-        btnOpenFile.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("text/*");
-            //noinspection deprecation
-            startActivityForResult(intent, 1);
-        });
-
-        // virtual device에서는 제대로 저장이 되지 않는 경우가 존재하나,
-        // 실제 디바이스에서 정상적으로 작동하는 것으로 확인됨.
-        btnSaveFile.setOnClickListener(v -> {
-            if (uri == null) {
-                return;
-            }
-
-            try {
-                OutputStream outputStream = getContentResolver().openOutputStream(uri);
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                        Objects.requireNonNull(outputStream)));
-                writer.write(edtCodeWrite.getText().toString());
-                Toast.makeText(CodeWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -156,5 +144,47 @@ public class CodeWriteActivity extends AppCompatActivity {
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.code_write_activity_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.openFile:
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("text/*");
+                //noinspection deprecation
+                startActivityForResult(intent, 1);
+
+                break;
+
+            case R.id.saveFile:
+                try {
+                    OutputStream outputStream = getContentResolver().openOutputStream(uri);
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                            Objects.requireNonNull(outputStream)));
+                    writer.write(edtCodeWrite.getText().toString());
+                    Toast.makeText(CodeWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case android.R.id.home:
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

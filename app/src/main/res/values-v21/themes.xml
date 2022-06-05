@@ -16,6 +16,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- Custom Style 적용 -->
+        <item name="android:fontFamily">@font/medium</item>
     </style>
 
     <!-- 파란 버튼 스타일 -->
