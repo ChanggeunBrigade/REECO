@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,41 +20,44 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/codeScroll"
-        android:background="@drawable/shape_rectangle_with_stroke">
-
-        <com.amrdeveloper.codeview.CodeView
-            android:id="@+id/edt_codeWrite"
-            android:layout_width="wrap_content"
-            android:layout_height="500dp"
-            android:background="@android:color/transparent"
-            android:dropDownWidth="150dp"
-            android:dropDownHorizontalOffset="0dp"
-            android:dropDownSelector="@color/black"
-            android:fontFamily="@font/hack"
-            android:gravity="top"
-            android:hint=""
-            android:inputType="textMultiLine"
-            android:padding="15dp"
-            android:textSize="15sp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-    </HorizontalScrollView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
 
-    <android.widget.Button
-        android:id="@+id/btn_compile"
-        android:layout_height="50dp"
-        style="@style/CustomButtonBlueStyle"
-        android:layout_weight="1"
-        android:text="컴파일" />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/codeScroll"
+            android:background="@drawable/shape_rectangle_with_stroke">
+            <com.amrdeveloper.codeview.CodeView
+                android:id="@+id/edt_codeWrite"
+                android:layout_width="wrap_content"
+                android:layout_height="520dp"
+                android:background="@android:color/transparent"
+                android:dropDownWidth="150dp"
+                android:dropDownHorizontalOffset="0dp"
+                android:dropDownSelector="@color/black"
+                android:fontFamily="@font/hack"
+                android:gravity="top"
+                android:hint=""
+                android:inputType="textMultiLine"
+                android:padding="15dp"
+                android:textSize="15sp"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </HorizontalScrollView>
+
+        <android.widget.Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_compile"
+            android:layout_height="50dp"
+            style="@style/CustomButtonBlueStyle"
+            android:layout_weight="1"
+            android:text="컴파일" />
+
+    </LinearLayout>
 
 </LinearLayout>
