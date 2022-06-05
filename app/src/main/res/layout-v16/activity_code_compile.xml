@@ -38,6 +38,7 @@
             android:padding="15dp"
             android:textSize="15sp"
             tools:ignore="SpeakableTextPresentCheck" />
+
     </HorizontalScrollView>
 
     <LinearLayout
