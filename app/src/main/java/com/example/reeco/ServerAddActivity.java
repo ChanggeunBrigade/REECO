@@ -60,6 +60,7 @@ public class ServerAddActivity extends AppCompatActivity {
         btnServerAdd.setOnClickListener(v -> {
             if (edtName.getText().toString().replace(" ", "").equals("")
                     || edtIp.getText().toString().replace(" ", "").equals("")
+                    || !edtIp.getText().toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")
                     || edtPort.getText().toString().replace(" ", "").equals("")
                     || edtUser.getText().toString().replace(" ", "").equals("")
                     || edtPassword.getText().toString().replace(" ", "").equals("")
@@ -67,7 +68,8 @@ public class ServerAddActivity extends AppCompatActivity {
                 if (edtName.getText().toString().replace(" ", "").equals("")) {
                     edtName.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
                 }
-                if (edtIp.getText().toString().replace(" ", "").equals("")) {
+                if (edtIp.getText().toString().replace(" ", "").equals("") ||
+                        !edtIp.getText().toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
                     edtIp.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
                 }
                 if (edtPort.getText().toString().replace(" ", "").equals("")) {
