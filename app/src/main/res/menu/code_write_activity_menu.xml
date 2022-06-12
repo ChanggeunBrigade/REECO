@@ -3,11 +3,12 @@
 
     <item
         android:id="@+id/openFile"
-        android:title="Open File"
-         />
+        android:title="Open File" />
 
     <item
         android:id="@+id/saveFile"
-        android:title="Save File"
-         />
+        android:title="Save File" />
+    <item
+        android:id="@+id/searchText"
+        android:title="Search" />
 </menu>

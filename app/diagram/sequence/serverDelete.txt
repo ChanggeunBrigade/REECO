@@ -1,0 +1,13 @@
+@startuml
+title "서버 삭제"
+autonumber
+actor user
+participant app
+database db
+user --> app : 삭제할 서버 선택
+app --> db : 삭제할 서버 정보 조회
+db --> app : 삭제할 서버 정보 조회 성공
+app --> db : 서버 삭제 요청
+db --> app : 서버 삭제 성공
+app --> user : 서버 목록 삭제
+@enduml

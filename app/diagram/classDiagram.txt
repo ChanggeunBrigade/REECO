@@ -1,0 +1,47 @@
+@startuml
+class Database {
+    +insertAll(list(server))
+    +insert(server)
+    +insertOrUpdate(server)
+    +update(server)
+    +delete(server)
+    +getServers()
+    +findServerByName(name)
+}
+
+class Server {
+    name: String
+    ip: String
+    port: int
+    user: String
+    password: String
+}
+
+class MainActivity {
+    +selectServer()
+    +addServer()
+}
+
+class ServerAddActivity {
+    +addServer()
+}
+
+class CodeWriteActivity {
+    +writeCode()
+    +openFile()
+    +saveFile()
+    +compile()
+}
+
+class CompileResultActivity {
+    +showResult()
+}
+
+Server -- Database
+MainActivity -- ServerAddActivity
+ServerAddActivity -- Database
+MainActivity -- CodeWriteActivity
+CodeWriteActivity -- CompileResultActivity
+
+
+@enduml

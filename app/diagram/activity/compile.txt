@@ -1,0 +1,17 @@
+@startuml
+title "컴파일"
+start
+:서버 클릭;
+:에디터 화면 출력;
+:파일 열기;
+:외부 파일 선택;
+:파일 내용 출력;
+repeat :파일 수정;
+backward: 파일 저장;
+repeat while (파일 수정?) is (yes)
+->no;
+:컴파일 버튼 클릭;
+:컴파일 실행;
+:컴파일 결과 출력;
+end
+@enduml

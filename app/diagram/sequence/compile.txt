@@ -1,0 +1,25 @@
+@startuml
+title "컴파일"
+autonumber
+actor user
+participant app
+database db
+database storage
+participant "external server" as ext
+user --> app : 서버 선택
+app --> db : 서버 정보 조회
+db --> app : 서버 정보 반환
+app --> user : 에디터 화면 출력
+user --> app : 파일 선택 요청
+app --> storage : 파일 데이터 조회
+storage --> app : 파일 데이터 반환
+app --> user : 파일 데이터 출력
+user --> app : 파일 수정 및 저장
+app --> storage : 파일 데이터 저장
+storage --> app : 파일 데이터 저장 완료
+app --> user : 파일 수정 완료
+user --> app : 컴파일 요청
+app --> ext : 컴파일 요청
+ext --> app : 컴파일 및 실행 결과 반환
+app --> user : 컴파일 결과 출력
+@enduml

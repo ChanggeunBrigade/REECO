@@ -1,0 +1,11 @@
+@startuml
+title "서버 삭제"
+start
+:서버 길게 누르기;
+:서버 삭제 여부 확인;
+if (확인?) then(yes)
+    :서버 삭제;
+else (no)
+endif
+end
+@enduml
