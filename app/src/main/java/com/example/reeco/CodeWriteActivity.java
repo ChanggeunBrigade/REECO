@@ -179,7 +179,7 @@ public class CodeWriteActivity extends AppCompatActivity {
 
                 break;
             case R.id.searchText:
-                // TODO: 텍스트 검색 기능 추가필요.
+
 
             case android.R.id.home:
                 finish();
