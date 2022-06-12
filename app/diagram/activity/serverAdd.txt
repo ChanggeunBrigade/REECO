@@ -1,0 +1,12 @@
+@startuml
+title "서버 추가"
+start
+:서버 추가 버튼 클릭;
+:서버 추가 화면 표시;
+repeat
+:서버 정보 입력 후 추가 버튼 클릭;
+repeat while (입력이 유효한가) is (no)
+-> yes;
+:서버 추가 성공;
+end
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+title "서버 추가"
+autonumber
+actor user
+participant app
+database db
+user --> app : 서버 추가 버튼 클릭
+app --> user : 서버 추가 화면 출력
+user --> app : 서버 정보 입력 후 추가 버튼 클릭
+app --> db : 서버 추가 요청
+db --> app : 서버 추가 성공
+app --> user : 새로운 서버 정보 출력
+@enduml
