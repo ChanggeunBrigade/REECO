@@ -1,0 +1,22 @@
+@startuml
+hide empty description
+
+title "서버 추가"
+
+state "서버 추가" as s1
+s1: entry / 서버 추가 버튼 클릭
+s1: do / 서버 정보 입력
+s1: exit / 서버 추가 버튼 클릭
+
+state "서버 추가 성공" as s2
+s2: entry / 서버 추가 성공
+s2: do / 데이터베이스 저장
+s2: exit / 메인 화면 이동
+
+[*] --> s1
+s1 --> s1: 유효성 체크 실패
+s1 --> s2
+
+s2 --> [*]
+
+@enduml

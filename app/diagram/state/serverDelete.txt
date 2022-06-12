@@ -1,0 +1,26 @@
+@startuml
+hide empty description
+
+title "서버 삭제"
+
+state "서버 삭제 경고" as s1
+s1: entry / 서버 길게 터치
+s1: exit / 버튼 클릭
+
+state "서버 삭제 수행" as s2
+s2: entry / 확인 버튼 클릭
+s2: do / 서버 삭제 수행
+s2: exit / 메인 화면 이동
+
+state "서버 삭제 취소" as s3
+s3: entry / 서버 삭제 취소
+s3: exit / 메인 화면 이동
+
+
+[*] --> s1
+s1 --> s2
+s1 --> s3
+s2 --> [*]
+s3 --> [*]
+
+@enduml
