@@ -153,6 +153,14 @@ public class CodeWriteActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+
+
+
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.openFile:
@@ -161,6 +169,14 @@ public class CodeWriteActivity extends AppCompatActivity {
                 intent.setType("text/*");
                 //noinspection deprecation
                 startActivityForResult(intent, 1);
+
+                Menu menu = toolbar.getMenu();
+
+                MenuItem menuSave = menu.findItem(R.id.saveFile);
+                MenuItem menuSearch = menu.findItem(R.id.searchText);
+
+                menuSave.setEnabled(true);
+                menuSearch.setEnabled(true);
 
                 break;
 
