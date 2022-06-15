@@ -7,11 +7,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +40,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class CodeWriteActivity extends AppCompatActivity {
@@ -46,6 +50,13 @@ public class CodeWriteActivity extends AppCompatActivity {
     Toolbar toolbar;
     ActionBar actionBar;
     LinearLayout layoutFindText;
+    EditText edtFindText;
+    Button btnCompile;
+    ArrayList<Integer> findTextList;
+    int findTextIndex;
+    Button btnFindPrev;
+    Button btnFindNext;
+    FindText findText;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -58,18 +69,17 @@ public class CodeWriteActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        Button btnCompile = findViewById(R.id.btn_compile);
-
+        btnCompile = findViewById(R.id.btn_compile);
         txtFilename = findViewById(R.id.txtFilename);
         edtCodeWrite = findViewById(R.id.edt_codeWrite);
-
         layoutFindText = findViewById(R.id.layoutFindText);
+        edtFindText = findViewById(R.id.edtFindText);
+        btnFindNext = findViewById(R.id.btnFindNext);
+        btnFindPrev = findViewById(R.id.btnFindPrev);
 
         Intent receivedIntent = getIntent();
 
@@ -87,6 +97,84 @@ public class CodeWriteActivity extends AppCompatActivity {
             intent.putExtra("password", password);
 
             startActivity(intent);
+        });
+
+        findText = new FindText();
+
+        edtCodeWrite.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() < 2) {
+                    return;
+                }
+
+                findText.setMainString(s.toString());
+                try {
+                    findText.search();
+                } catch (Exception ignored) {
+
+                }
+                findTextIndex = 0;
+            }
+        });
+
+        edtFindText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() < 2) {
+                    return;
+                }
+
+                findText.setFindString(s.toString());
+                try {
+                    findTextList = findText.search();
+                    findTextIndex = 0;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        btnFindNext.setOnClickListener(v -> {
+            try {
+                int curIndex = findTextList.get(findTextIndex);
+                edtCodeWrite.requestFocus();
+                edtCodeWrite.setSelection(curIndex, curIndex + findText.findString.length() - 1);
+                findTextIndex = (findTextIndex + 1) % findTextList.size();
+            } catch (Exception ignored) {
+
+            }
+        });
+
+        btnFindPrev.setOnClickListener(v -> {
+            try {
+                int curIndex = findTextList.get(findTextIndex);
+                edtCodeWrite.requestFocus();
+                edtCodeWrite.setSelection(curIndex, curIndex + findText.findString.length() - 1);
+                findTextIndex = (findTextIndex + findTextList.size() - 1) % findTextList.size();
+            } catch (Exception ignored) {
+
+            }
         });
     }
 
@@ -157,8 +245,7 @@ public class CodeWriteActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu (Menu menu) {
-
+    public boolean onPrepareOptionsMenu(Menu menu) {
 
 
         return true;

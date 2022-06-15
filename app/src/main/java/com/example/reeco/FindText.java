@@ -13,6 +13,11 @@ public class FindText {
         findFailArray();
     }
 
+    FindText() {
+        this.mainString = null;
+        this.findString = null;
+    }
+
     void setMainString(String mainString) {
         this.mainString = mainString;
     }
