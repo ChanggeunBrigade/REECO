@@ -8,17 +8,54 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rectangle">
 
         <TextView
-            style="@style/CustomTextViewTitleStyle"
             android:id="@+id/txtFilename"
-            android:fontFamily="@font/medium"
+            style="@style/CustomTextViewTitleStyle"
             android:layout_gravity="center"
-            android:textSize="18sp"
-            android:text="Select File" />
+            android:fontFamily="@font/medium"
+            android:text="Select File"
+            android:textSize="18sp" />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/layoutFindText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:ems="10"
+            android:hint="search"
+            android:inputType="textPersonName"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnFindPrev"
+            android:layout_width="49dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rectangle"
+            android:text="위"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btnFindNext"
+            android:layout_width="49dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="아"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,15 +64,15 @@
         android:orientation="vertical">
 
         <HorizontalScrollView
+            android:id="@+id/codeScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/codeScroll"
             android:background="@drawable/shape_rectangle">
+
             <com.amrdeveloper.codeview.CodeView
                 android:id="@+id/edt_codeWrite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:dropDownWidth="150dp"
                 android:dropDownHorizontalOffset="0dp"
@@ -44,8 +81,8 @@
                 android:gravity="top"
                 android:hint=""
                 android:inputType="textMultiLine"
-                android:paddingTop="10dp"
                 android:paddingLeft="15dp"
+                android:paddingTop="10dp"
                 android:textSize="15sp"
                 tools:ignore="SpeakableTextPresentCheck" />
         </HorizontalScrollView>
@@ -59,9 +96,9 @@
 
         <android.widget.Button
             android:id="@+id/btn_compile"
+            style="@style/CustomButtonBlueStyle"
             android:layout_height="60dp"
             android:background="@drawable/shape_rectangle_blue"
-            style="@style/CustomButtonBlueStyle"
             android:text="컴파일" />
 
     </LinearLayout>

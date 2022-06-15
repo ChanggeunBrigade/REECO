@@ -10,7 +10,9 @@ import android.provider.OpenableColumns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ public class CodeWriteActivity extends AppCompatActivity {
     Uri uri;
     Toolbar toolbar;
     ActionBar actionBar;
+    LinearLayout layoutFindText;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -65,6 +68,8 @@ public class CodeWriteActivity extends AppCompatActivity {
 
         txtFilename = findViewById(R.id.txtFilename);
         edtCodeWrite = findViewById(R.id.edt_codeWrite);
+
+        layoutFindText = findViewById(R.id.layoutFindText);
 
         Intent receivedIntent = getIntent();
 
@@ -105,10 +110,9 @@ public class CodeWriteActivity extends AppCompatActivity {
 
         txtFilename.setText(returnCursor.getString(nameIndex));
 
-
         LanguageManager langManager = new LanguageManager(this, edtCodeWrite);
 
-        String[] split = uri.getPath().split("[.]");
+        String[] split = returnCursor.getString(nameIndex).split("[.]");
         String fileExt = split[split.length - 1];
 
         switch (fileExt) {
@@ -195,7 +199,8 @@ public class CodeWriteActivity extends AppCompatActivity {
 
                 break;
             case R.id.searchText:
-
+                layoutFindText.setVisibility(View.VISIBLE);
+                break;
 
             case android.R.id.home:
                 finish();
