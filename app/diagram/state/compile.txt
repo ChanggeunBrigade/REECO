@@ -1,0 +1,50 @@
+@startuml
+hide empty description
+
+title "컴파일"
+
+state "서버 선택" as s1
+s1: entry / 서버 클릭
+s1: exit / 에디터 실행
+
+state "에디터 실행" as s2
+s2: entry / 에디터 실행
+s2: exit / 파일 열기 버튼 클릭
+
+state "파일 열기" as s3
+s3: entry / 파일 열기 버튼 클릭
+s3: do / 외부 파일관리자 실행
+s3: exit / 파일 선택
+
+state "파일 내용 출력" as s4
+s4: entry / 파일 선택
+s4: do / 선택한 파일 내용 출력
+s4: exit / 파일 선택
+
+state "파일 수정" as s5
+s5: entry / 파일 선택
+s5: do / 에디터 내용 수정
+s5: exit / 버튼 클릭
+
+state "파일 저장" as s6
+s6: entry / 파일 저장 버튼 클릭
+s6: do / 에디터 내용 저장
+s6: exit / 파일 저장 완료
+
+state "컴파일" as s7
+s7: entry / 컴파일 버튼 클릭
+s7: do / 컴파일 실행
+s7: exit / 컴파일 결과 출력
+
+[*] --> s1
+s1 --> s2
+s2 --> s3
+s3 --> s4
+s4 --> s5
+s5 --> s3
+s5 --> s6
+s6 --> s5
+s5 --> s7
+s7 --> [*]
+
+@enduml
