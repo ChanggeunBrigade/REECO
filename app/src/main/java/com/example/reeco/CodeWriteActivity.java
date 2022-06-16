@@ -44,19 +44,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CodeWriteActivity extends AppCompatActivity {
-    final CodeView edtCodeWrite;
-    final TextView txtFilename;
-    final Uri uri;
-    final Toolbar toolbar;
-    final ActionBar actionBar;
-    final LinearLayout layoutFindText;
-    final EditText edtFindText;
-    final Button btnCompile;
-    ArrayList<Integer> findTextList;
-    int findTextIndex;
-    final Button btnFindPrev;
-    final Button btnFindNext;
-    final FindText findText;
+    private final CodeView edtCodeWrite;
+    private final TextView txtFilename;
+    private final Uri uri;
+    private final Toolbar toolbar;
+    private final ActionBar actionBar;
+    private final LinearLayout layoutFindText;
+    private final EditText edtFindText;
+    private final Button btnCompile;
+    private ArrayList<Integer> findTextList;
+    private int findTextIndex;
+    private final Button btnFindPrev;
+    private final Button btnFindNext;
+    private final FindText findText;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
