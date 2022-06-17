@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class FindText {
     String mainString;
     String findString;
-    Integer[] failArray;
+    ArrayList<Integer> failArray;
 
     FindText(String mainString, String findString) {
         this.mainString = mainString;
@@ -37,10 +37,12 @@ public class FindText {
 
         while (index < mainString.length()) {
             int findIndex = kmp(index);
-            if (findIndex == -1) {
-                return result;
+            if (findIndex != -1) {
+                result.add(findIndex);
+                index = findIndex + 1;
+            } else {
+                index++;
             }
-            index = findIndex + 1;
         }
 
         return result;
@@ -50,7 +52,11 @@ public class FindText {
     KMP 알고리즘의 fail array를 구하는 함수입니다.
      */
     void findFailArray() {
-        failArray = new Integer[findString.length()];
+        failArray = new ArrayList<>();
+
+        for (int i = 0; i < findString.length(); i++) {
+            failArray.add(0);
+        }
 
         // fail array를 구하기 위한 메인 인덱스입니다.
         // index 0의 원소는 0인 것이 확정되어 있기 때문에 1부터 검사를 수행합니다.
@@ -64,7 +70,7 @@ public class FindText {
             // result의 값을 변경하면서 계속 이동합니다.
             if (findString.charAt(mainIndex + subIndex) == findString.charAt(subIndex)) {
                 subIndex++;
-                failArray[mainIndex + subIndex - 1] = subIndex;
+                failArray.set(mainIndex + subIndex - 1, subIndex);
                 continue;
             }
 
@@ -75,26 +81,29 @@ public class FindText {
             }
 
             // fail array 정보를 이용하여 index를 이동합니다.
-            mainIndex += subIndex - failArray[subIndex - 1];
-            subIndex = failArray[subIndex - 1];
+            mainIndex += subIndex - failArray.get(subIndex - 1);
+            subIndex = failArray.get(subIndex - 1);
         }
     }
 
 
-    int kmp(int mainIndex) {
+    int kmp(int startIndex) {
         // 패턴 문자열의 크기가 원 문자열의 크기보다 클 경우, 절대 일치할 수 없습니다.
-        if (mainString.length() - mainIndex > findString.length()) {
+        if (mainString.length() - startIndex < findString.length()) {
             return -1;
         }
 
+        String tmp = mainString.substring(startIndex);
+
         // 탐색을 위한 find index입니다.
+        int mainIndex = 0;
         int findIndex = 0;
 
-        while (mainIndex + findIndex < mainString.length()) {
-            if (mainString.charAt(mainIndex + findIndex) == findString.charAt(findIndex)) {
+        while (mainIndex + findIndex < tmp.length()) {
+            if (tmp.charAt(findIndex) == findString.charAt(findIndex)) {
                 findIndex++;
                 if (findIndex >= findString.length()) {
-                    return mainIndex;
+                    return mainIndex + startIndex;
                 }
                 continue;
             }
@@ -104,8 +113,8 @@ public class FindText {
                 continue;
             }
 
-            mainIndex += findIndex - failArray[findIndex - 1];
-            findIndex = failArray[findIndex - 1];
+            mainIndex += findIndex - failArray.get(findIndex - 1);
+            findIndex = failArray.get(findIndex - 1);
         }
 
         // 문자를 찾지 못한 경우
