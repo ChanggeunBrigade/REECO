@@ -151,7 +151,6 @@ public class CodeWriteActivity extends AppCompatActivity {
                 try {
                     findTextList = findText.search();
                     findTextIndex = 0;
-                    Toast.makeText(CodeWriteActivity.this, s.toString(), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -173,7 +172,7 @@ public class CodeWriteActivity extends AppCompatActivity {
             try {
                 int curIndex = findTextList.get(findTextIndex);
                 edtCodeWrite.requestFocus();
-                edtCodeWrite.setSelection(curIndex, curIndex + findText.findString.length() - 1);
+                edtCodeWrite.setSelection(curIndex, curIndex + findText.findString.length());
                 findTextIndex = (findTextIndex + findTextList.size() - 1) % findTextList.size();
             } catch (Exception ignored) {
 
