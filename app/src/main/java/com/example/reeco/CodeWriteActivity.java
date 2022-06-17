@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,19 +45,20 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CodeWriteActivity extends AppCompatActivity {
-    private final CodeView edtCodeWrite;
-    private final TextView txtFilename;
-    private final Uri uri;
-    private final Toolbar toolbar;
-    private final ActionBar actionBar;
-    private final LinearLayout layoutFindText;
-    private final EditText edtFindText;
-    private final Button btnCompile;
+    private CodeView edtCodeWrite;
+    private TextView txtFilename;
+    private Uri uri;
+    private Toolbar toolbar;
+    private ActionBar actionBar;
+    private LinearLayout layoutFindText;
+    private EditText edtFindText;
+    private Button btnCompile;
     private ArrayList<Integer> findTextList;
     private int findTextIndex;
-    private final Button btnFindPrev;
-    private final Button btnFindNext;
-    private final FindText findText;
+    private Button btnFindPrev;
+    private Button btnFindNext;
+    private Button btnFindExit;
+    private FindText findText;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -80,6 +82,7 @@ public class CodeWriteActivity extends AppCompatActivity {
         edtFindText = findViewById(R.id.edtFindText);
         btnFindNext = findViewById(R.id.btnFindNext);
         btnFindPrev = findViewById(R.id.btnFindPrev);
+        btnFindExit = findViewById(R.id.btnFindExit);
 
         Intent receivedIntent = getIntent();
 
@@ -176,6 +179,16 @@ public class CodeWriteActivity extends AppCompatActivity {
 
             }
         });
+
+        btnFindExit.setOnClickListener(v -> {
+            try {
+                layoutFindText.setVisibility(View.GONE);
+            } catch (Exception ignored) {
+
+            }
+        });
+
+
     }
 
     @Override

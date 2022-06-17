@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_rectangle">
+        android:background="@color/transparent">
 
         <TextView
             android:id="@+id/txtFilename"
@@ -20,42 +20,6 @@
             android:textSize="18sp" />
 
     </androidx.appcompat.widget.Toolbar>
-
-    <LinearLayout
-        android:id="@+id/layoutFindText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <EditText
-            android:id="@+id/edtFindText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:ems="10"
-            android:hint="search"
-            android:inputType="textPersonName"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/btnFindPrev"
-            android:layout_width="49dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_rectangle"
-            android:text="위"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/btnFindNext"
-            android:layout_width="49dp"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:text="아"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,8 +48,78 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
                 android:textSize="15sp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutFindText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/edtFindText"
+            android:fontFamily="@font/regular"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:background="@color/transparent"
+            android:ems="10"
+            android:hint="Search.."
+            android:textSize="17sp" />
+
+        <!-- <ImageButton
+            style="@style/CustomButtonWhiteStrokeStyle"
+            android:background="@color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/search_icon" /> -->
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="49dp"
+            android:background="#d6d6d6" />
+
+        <Button
+            android:id="@+id/btnFindPrev"
+            style="@style/CustomButtonWhiteStrokeStyle"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:text="↑"
+            android:textColor="#848484"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/btnFindNext"
+            style="@style/CustomButtonWhiteStrokeStyle"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:text="↓"
+            android:textColor="#848484"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/btnFindExit"
+            style="@style/CustomButtonWhiteStrokeStyle"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:background="#d6d6d6"
+            android:fontFamily="@font/semibold"
+            android:text="X"
+            android:textColor="#848484"
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
 
     </LinearLayout>
 
