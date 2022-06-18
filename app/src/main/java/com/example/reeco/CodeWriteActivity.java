@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,6 +32,10 @@ import com.amrdeveloper.codeview.CodeView;
 import com.example.reeco.syntax.LanguageManager;
 import com.example.reeco.syntax.LanguageName;
 import com.example.reeco.syntax.ThemeName;
+import com.hbisoft.pickit.PickiT;
+import com.hbisoft.pickit.PickiTCallbacks;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,7 +48,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class CodeWriteActivity extends AppCompatActivity {
+public class CodeWriteActivity extends AppCompatActivity implements PickiTCallbacks {
     private CodeView edtCodeWrite;
     private TextView txtFilename;
     private Uri uri;
@@ -58,6 +63,9 @@ public class CodeWriteActivity extends AppCompatActivity {
     private Button btnFindNext;
     private Button btnFindExit;
     private FindText findText;
+    private TextView testView;
+
+    PickiT pickiT;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -82,6 +90,9 @@ public class CodeWriteActivity extends AppCompatActivity {
         btnFindNext = findViewById(R.id.btnFindNext);
         btnFindPrev = findViewById(R.id.btnFindPrev);
         btnFindExit = findViewById(R.id.btnFindExit);
+        testView = findViewById(R.id.testView);
+
+        pickiT = new PickiT(this, this, this);
 
         Intent receivedIntent = getIntent();
 
@@ -208,6 +219,10 @@ public class CodeWriteActivity extends AppCompatActivity {
         int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
         returnCursor.moveToFirst();
 
+        if (resultCode == RESULT_OK) {
+            pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
+        }
+
         txtFilename.setText(returnCursor.getString(nameIndex));
 
         LanguageManager langManager = new LanguageManager(this, edtCodeWrite);
@@ -310,5 +325,33 @@ public class CodeWriteActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void PickiTonUriReturned() {
+
+    }
+
+    @Override
+    public void PickiTonStartListener() {
+
+    }
+
+    @Override
+    public void PickiTonProgressUpdate(int progress) {
+
+    }
+
+    @Override
+    public void PickiTonCompleteListener(String path, boolean wasDriveFile, boolean wasUnknownProvider, boolean wasSuccessful, String Reason) {
+        if (wasSuccessful) {
+            testView.setText(path);
+        }
+    }
+
+    @Override
+    public void PickiTonMultipleCompleteListener(ArrayList<String> paths, boolean wasSuccessful, String Reason) {
+
     }
 }

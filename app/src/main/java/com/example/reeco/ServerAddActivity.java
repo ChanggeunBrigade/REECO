@@ -120,13 +120,13 @@ public class ServerAddActivity extends AppCompatActivity {
 
         btnServerAdd.setOnClickListener(v -> {
             boolean isValid = true;
+            boolean ipisValid = true;
 
             if (edtName.getText().toString().replace(" ", "").equals("")) {
                 edtName.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
                 isValid = false;
             }
-            if (edtIp.getText().toString().replace(" ", "").equals("") ||
-                    !edtIp.getText().toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
+            if (edtIp.getText().toString().replace(" ", "").equals("")) {
                 edtIp.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
                 isValid = false;
             }
@@ -148,8 +148,19 @@ public class ServerAddActivity extends AppCompatActivity {
                 isValid = false;
             }
 
+            if (!edtIp.getText().toString().matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")) {
+                ipisValid = false;
+            }
+
             if (!isValid) {
                 Toast.makeText(this, "입력을 완료해주십시오.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!ipisValid) {
+                edtIp.setBackgroundResource(R.drawable.edittext_rectangle_with_redstroke);
+                edtIp.requestFocus();
+                Toast.makeText(this, "입력한 IP 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
