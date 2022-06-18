@@ -160,7 +160,8 @@ public class ServerAddActivity extends AppCompatActivity {
                     edtIp.getText().toString(),
                     Integer.parseInt(edtPort.getText().toString()),
                     edtUser.getText().toString(),
-                    edtPassword.getText().toString()
+                    edtPassword.getText().toString(),
+                    edtExecuteCom.getText().toString()
             )));
 
             finish();

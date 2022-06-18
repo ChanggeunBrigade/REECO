@@ -17,14 +17,17 @@ public class Server {
     private String user;
     @NonNull
     private String password;
+    @NonNull
+    private String compiler;
 
     public Server(@NonNull String name, @NonNull String ip,
-                  int port, @NonNull String user, @NonNull String password) {
+                  int port, @NonNull String user, @NonNull String password, @NonNull String compiler) {
         this.name = name;
         this.ip = ip;
         this.port = port;
         this.user = user;
         this.password = password;
+        this.compiler = compiler;
     }
 
     @NonNull
@@ -80,4 +83,9 @@ public class Server {
     public void setPassword(@NonNull String password) {
         this.password = password;
     }
+
+    @NonNull
+    public String getCompiler() { return compiler; }
+
+    public void setCompiler(@NonNull String compiler) { this.compiler = compiler; }
 }
