@@ -15,6 +15,7 @@ class Server {
     port: int
     user: String
     password: String
+    compiler: String
 }
 
 class MainActivity {
