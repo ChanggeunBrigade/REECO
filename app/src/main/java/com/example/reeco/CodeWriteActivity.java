@@ -289,7 +289,10 @@ public class CodeWriteActivity extends AppCompatActivity {
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                             Objects.requireNonNull(outputStream)));
                     writer.write(edtCodeWrite.getText().toString());
+                    writer.flush();
+                    writer.close();
                     Toast.makeText(CodeWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    outputStream.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
