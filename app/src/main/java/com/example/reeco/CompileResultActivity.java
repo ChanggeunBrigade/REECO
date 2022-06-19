@@ -3,6 +3,7 @@ package com.example.reeco;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,6 +19,9 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class CompileResultActivity extends AppCompatActivity {
     Session session;
     String ip;
@@ -28,6 +32,8 @@ public class CompileResultActivity extends AppCompatActivity {
     String compileResult;
     EditText resultText;
 
+    Button btnRefresh;
+
 
 
     @Override
@@ -36,7 +42,6 @@ public class CompileResultActivity extends AppCompatActivity {
         // 다크모드 무효화
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_compile_result);
-
         Intent receivedIntent = getIntent();
 
         ip = receivedIntent.getStringExtra("ip");
@@ -47,11 +52,11 @@ public class CompileResultActivity extends AppCompatActivity {
         compileResult = receivedIntent.getStringExtra("compilerResult");
 
         Button btnExit = findViewById(R.id.btnExit);
-        resultText = (EditText) findViewById(R.id.resultText);
-
-        resultText.setText(compileResult);
 
         btnExit.setOnClickListener(view -> finish());
+
+        resultText = (EditText) findViewById(R.id.resultText);
+        resultText.setText(compileResult);
     }
 
     @Override

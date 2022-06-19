@@ -58,6 +58,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Properties;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class CodeWriteActivity extends AppCompatActivity implements PickiTCallbacks {
     private CodeView edtCodeWrite;
     private TextView txtFilename;
@@ -152,13 +155,12 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
 
             Thread thread = new Thread(() -> {
                 compilerResult = getSSHResponse(user, port, ip, password, src, tmp, compileFile, fileNameWithExt, fileNameWithoutExt);
+                intent.putExtra("compilerResult", compilerResult);
+                startActivity(intent);
             });
 
             thread.start();
             thread.interrupt();
-
-            intent.putExtra("compilerResult", compilerResult);
-            startActivity(intent);
         });
 
         findText = new FindText();
@@ -320,19 +322,16 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
         try {
             upload(src, tmp, compileFile);
 
-
             channelExec = (ChannelExec) session.openChannel("exec");
-            channelExec.setCommand("cd /tmp && java "+fileExt);
-            //channelExec.setCommand("cd /tmp && ls -al");// while을 돌리기 위한 기본 명령어와 && 로 묶기위한 시도
+            channelExec.setCommand("cd /tmp && java " + fileExt);
 
-            System.out.println("cd /tmp && javac " + fileExt + " && java " + fileNotExt);
+            System.out.println("cd /tmp && java " + fileExt);
             InputStream inputStream = channelExec.getInputStream();
             channelExec.connect();
 
-
-
             byte[] buffer = new byte[8192];
             int decodedLength;
+
             response = new StringBuilder();
             while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0) {
                 response.append(new String(buffer, 0, decodedLength));
@@ -345,7 +344,7 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
         } finally {
             this.disConnectSSH();
         }
-        //return Test;
+        System.out.println("기록 완료");
         return response.toString();
     }
 

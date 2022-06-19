@@ -21,13 +21,22 @@
             android:fontFamily="@font/regular"
             android:gravity="top"
             android:padding="15dp"
-            android:text="Hello World!"
+            android:text=""
+            android:enabled="false"
+            android:textColor="@color/black"
             android:textSize="15sp" />
+
+        <android.widget.Button
+            android:id="@+id/btnRefresh"
+            style="@style/CustomButtonWhiteStrokeStyle"
+            android:background="@drawable/shape_rectangle_with_stroke"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:text="새로 고침" />
 
         <android.widget.Button
             android:id="@+id/btnExit"
             style="@style/CustomButtonBlueStyle"
-            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:text="닫기" />
 
