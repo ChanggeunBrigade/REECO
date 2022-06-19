@@ -34,11 +34,20 @@ import com.example.reeco.syntax.LanguageName;
 import com.example.reeco.syntax.ThemeName;
 import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,6 +56,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Properties;
 
 public class CodeWriteActivity extends AppCompatActivity implements PickiTCallbacks {
     private CodeView edtCodeWrite;
@@ -65,6 +75,16 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
     private FindText findText;
     private TextView testView;
 
+    private Channel channel = null;
+    private ChannelSftp channelSftp = null;
+    private Session session;
+    private ChannelExec channelExec;
+    private String src;
+    private String fileNameWithExt;
+    private String fileNameWithoutExt;
+    private File compileFile;
+    String compilerResult;
+    String tmp = "/tmp";
     PickiT pickiT;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -100,15 +120,44 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
         int port = receivedIntent.getIntExtra("port", 0);
         String user = receivedIntent.getStringExtra("user");
         String password = receivedIntent.getStringExtra("password");
+        String compiler = receivedIntent.getStringExtra("compiler");
 
         btnCompile.setOnClickListener(view -> {
+            src = testView.getText().toString();
+            compileFile = new File(src);
+
+            fileNameWithExt="";
+            fileNameWithoutExt="";
+
+            String[] slashDivide = src.split("[/]");
+            fileNameWithExt = slashDivide[slashDivide.length - 1];
+
+            String[] dotDivide = fileNameWithExt.split(("[.]"));
+            for(int i=0; i<dotDivide.length-1; i++){
+                if(i == 0) {
+                    fileNameWithoutExt = fileNameWithoutExt + dotDivide[i];
+                }else
+                    fileNameWithoutExt = fileNameWithoutExt + "." + dotDivide[i];
+            }
+
+            System.out.println("확장자 포함 = " + fileNameWithExt + " 확장자 미포함 = " + fileNameWithoutExt);
+
             Intent intent = new Intent(getApplicationContext(), CompileResultActivity.class);
 
             intent.putExtra("ip", ip);
             intent.putExtra("port", port);
             intent.putExtra("user", user);
             intent.putExtra("password", password);
+            intent.putExtra("compiler", compiler);
 
+            Thread thread = new Thread(() -> {
+                compilerResult = getSSHResponse(user, port, ip, password, src, tmp, compileFile, fileNameWithExt, fileNameWithoutExt);
+            });
+
+            thread.start();
+            thread.interrupt();
+
+            intent.putExtra("compilerResult", compilerResult);
             startActivity(intent);
         });
 
@@ -197,20 +246,114 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
 
             }
         });
+    }
+
+    public void connectSSH(String user, int port, String ip, String password) {
+        System.out.println("==> Connecting to " + ip);
+        System.out.println("==> this port " + port);
+
+        JSch jsch = new JSch();
+
+        try {
+            session = jsch.getSession(user, ip, port);
+            session.setPassword(password);
+
+            Properties config = new Properties();
+            config.put("StrictHostKeyChecking", "no");
+
+            session.setConfig(config);
+            session.connect();
+
+            channel = session.openChannel("sftp");
+            channel.connect();
+        } catch (JSchException e) {
+            System.out.println("연결오류");
+            e.printStackTrace();
+        }
+        channelSftp = (ChannelSftp) channel;
+    }
+
+    public void upload(String src, String dst, File file) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            channel = session.openChannel("sftp");
+            channel.connect();
+            channelSftp.cd(dst);
+            channelSftp.put(src, dst);
+        } catch (JSchException je) {
+            je.printStackTrace();
+        } catch (FileNotFoundException fe) {
+            System.out.println("파일 없음");
+            fe.printStackTrace();
+        } catch (SftpException se) {
+                se.printStackTrace();
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+    }
+
+    public void command(String fileExt, String fileNotExt) {
+        try {
+            channelExec = (ChannelExec) session.openChannel("exec");
+
+            // cd /tmp + javac(.java => .class) 파일이름 + java 파일이름
+            channelExec.setCommand("cd /tmp && javac " + fileExt + "&&java " + fileNotExt);
+            System.out.println("명령어 확인 cd /tmp && javac " + fileExt + "&&java " + fileNotExt);
+        } catch (JSchException je) {
+            System.out.println("커맨드 오류");
+            je.printStackTrace();
+        } finally {
+            this.disConnectSSH();
+        }
+    }
+
+    public String getSSHResponse(String user, int port, String ip, String password,
+                                 String src, String tmp, File compileFile, String fileExt, String fileNotExt) {
+        connectSSH(user, port, ip, password);
+        StringBuilder response = null;
+
+        try {
+            upload(src, tmp, compileFile);
+            System.out.println("순서1");
+
+            channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setCommand("cd /tmp && javac " + fileExt + "&& java " + fileNotExt);
+
+            InputStream inputStream = channelExec.getInputStream();
+            channelExec.connect();
+
+            System.out.println("순서2");
+
+            byte[] buffer = new byte[8192];
+            int decodedLength;
+            response = new StringBuilder();
+            while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0)
+                response.append(new String(buffer, 0, decodedLength));
 
 
+        } catch (JSchException je) {
+            je.printStackTrace();
+        } catch (IOException ie) {
+            ie.printStackTrace();
+        } finally {
+            this.disConnectSSH();
+        }
+        return response.toString();
+    }
+
+    private void disConnectSSH() {
+        if (session != null) session.disconnect();
+        if (channelExec != null) channelExec.disconnect();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode != 1 || resultCode != Activity.RESULT_OK) {
-            return;
-        }
-        if (data == null) {
-            return;
-        }
 
         uri = data.getData();
 
@@ -326,7 +469,6 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
 
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void PickiTonUriReturned() {

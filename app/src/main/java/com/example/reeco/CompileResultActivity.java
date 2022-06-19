@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,6 +24,9 @@ public class CompileResultActivity extends AppCompatActivity {
     int port;
     String user;
     String password;
+    String compiler;
+    String compileResult;
+    EditText resultText;
 
 
 
@@ -39,8 +43,13 @@ public class CompileResultActivity extends AppCompatActivity {
         port = receivedIntent.getIntExtra("port", 0);
         user = receivedIntent.getStringExtra("user");
         password = receivedIntent.getStringExtra("password");
+        compiler = receivedIntent.getStringExtra("compiler");
+        compileResult = receivedIntent.getStringExtra("compilerResult");
 
         Button btnExit = findViewById(R.id.btnExit);
+        resultText = (EditText) findViewById(R.id.resultText);
+
+        resultText.setText(compileResult);
 
         btnExit.setOnClickListener(view -> finish());
     }

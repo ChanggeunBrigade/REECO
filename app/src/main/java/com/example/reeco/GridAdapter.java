@@ -77,6 +77,7 @@ public class GridAdapter extends BaseAdapter {
                 intent.putExtra("port", server.getPort());
                 intent.putExtra("user", server.getUser());
                 intent.putExtra("password", server.getPassword());
+                intent.putExtra("compiler", server.getCompiler());
 
                 m_context.startActivity(intent);
             });
