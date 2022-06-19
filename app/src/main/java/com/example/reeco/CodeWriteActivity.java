@@ -303,7 +303,7 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
 
             // cd /tmp + javac(.java => .class) 파일이름 + java 파일이름
             channelExec.setCommand("cd /tmp && javac " + fileExt + "&&java " + fileNotExt);
-            System.out.println("명령어 확인 cd /tmp && javac " + fileExt + "&&java " + fileNotExt);
+
         } catch (JSchException je) {
             System.out.println("커맨드 오류");
             je.printStackTrace();
@@ -319,22 +319,24 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
 
         try {
             upload(src, tmp, compileFile);
-            System.out.println("순서1");
+
 
             channelExec = (ChannelExec) session.openChannel("exec");
-            channelExec.setCommand("cd /tmp && javac " + fileExt + "&& java " + fileNotExt);
+            channelExec.setCommand("cd /tmp && java "+fileExt);
+            //channelExec.setCommand("cd /tmp && ls -al");// while을 돌리기 위한 기본 명령어와 && 로 묶기위한 시도
 
+            System.out.println("cd /tmp && javac " + fileExt + " && java " + fileNotExt);
             InputStream inputStream = channelExec.getInputStream();
             channelExec.connect();
 
-            System.out.println("순서2");
+
 
             byte[] buffer = new byte[8192];
             int decodedLength;
             response = new StringBuilder();
-            while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0)
+            while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0) {
                 response.append(new String(buffer, 0, decodedLength));
-
+            }
 
         } catch (JSchException je) {
             je.printStackTrace();
@@ -343,6 +345,7 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
         } finally {
             this.disConnectSSH();
         }
+        //return Test;
         return response.toString();
     }
 
