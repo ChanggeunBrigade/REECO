@@ -51,6 +51,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -414,7 +415,9 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line).append("\n");
             }
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            if(stringBuilder.length() > 0) {
+                stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            }
         }
         return stringBuilder.toString();
     }
@@ -455,14 +458,17 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
 
             case R.id.saveFile:
                 try {
-                    OutputStream outputStream = getContentResolver().openOutputStream(uri);
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                            Objects.requireNonNull(outputStream)));
-                    writer.write(edtCodeWrite.getText().toString());
-                    writer.flush();
-                    writer.close();
+                    String txt = edtCodeWrite.getText().toString();
+                    src = testView.getText().toString();
+                    File newFile = new File(src);
+                    FileOutputStream fos = new FileOutputStream(newFile);
+
+                    BufferedWriter buw = new BufferedWriter(new OutputStreamWriter(fos, "UTF8"));
+                    buw.write(txt);
+                    buw.close();
+                    fos.close();
+
                     Toast.makeText(CodeWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
-                    outputStream.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
