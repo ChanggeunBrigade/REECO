@@ -1,6 +1,7 @@
 package com.example.reeco;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -101,6 +103,10 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Dialog mDialog = new Dialog(CodeWriteActivity.this);
+        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mDialog.setContentView(R.layout.custom_dialog);
+
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -145,6 +151,9 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
 
             System.out.println("확장자 포함 = " + fileNameWithExt + " 확장자 미포함 = " + fileNameWithoutExt);
 
+            LoadingDialog dlg = new LoadingDialog(CodeWriteActivity.this);
+            dlg.show();
+
             Intent intent = new Intent(getApplicationContext(), CompileResultActivity.class);
 
             intent.putExtra("ip", ip);
@@ -157,6 +166,7 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
                 compilerResult = getSSHResponse(user, port, ip, password, src, tmp, compileFile, fileNameWithExt, fileNameWithoutExt);
                 intent.putExtra("compilerResult", compilerResult);
                 startActivity(intent);
+                dlg.cancel();
             });
 
             thread.start();
