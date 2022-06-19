@@ -1,13 +1,11 @@
 package com.example.reeco;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -44,8 +42,6 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -55,16 +51,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Properties;
 
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 public class CodeWriteActivity extends AppCompatActivity implements PickiTCallbacks {
+    String compilerResult;
+    String tmp = "/tmp";
+    PickiT pickiT;
     private CodeView edtCodeWrite;
     private TextView txtFilename;
     private Uri uri;
@@ -80,7 +75,6 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
     private Button btnFindExit;
     private FindText findText;
     private TextView testView;
-
     private Channel channel = null;
     private ChannelSftp channelSftp = null;
     private Session session;
@@ -89,9 +83,6 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
     private String fileNameWithExt;
     private String fileNameWithoutExt;
     private File compileFile;
-    String compilerResult;
-    String tmp = "/tmp";
-    PickiT pickiT;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -136,17 +127,17 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
             src = testView.getText().toString();
             compileFile = new File(src);
 
-            fileNameWithExt="";
-            fileNameWithoutExt="";
+            fileNameWithExt = "";
+            fileNameWithoutExt = "";
 
             String[] slashDivide = src.split("[/]");
             fileNameWithExt = slashDivide[slashDivide.length - 1];
 
             String[] dotDivide = fileNameWithExt.split(("[.]"));
-            for(int i=0; i<dotDivide.length-1; i++){
-                if(i == 0) {
+            for (int i = 0; i < dotDivide.length - 1; i++) {
+                if (i == 0) {
                     fileNameWithoutExt = fileNameWithoutExt + dotDivide[i];
-                }else
+                } else
                     fileNameWithoutExt = fileNameWithoutExt + "." + dotDivide[i];
             }
 
@@ -300,7 +291,7 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
             System.out.println("파일 없음");
             fe.printStackTrace();
         } catch (SftpException se) {
-                se.printStackTrace();
+            se.printStackTrace();
         } finally {
             try {
                 fis.close();
@@ -415,7 +406,7 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line).append("\n");
             }
-            if(stringBuilder.length() > 0) {
+            if (stringBuilder.length() > 0) {
                 stringBuilder.deleteCharAt(stringBuilder.length() - 1);
             }
         }

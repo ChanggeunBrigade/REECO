@@ -4,15 +4,9 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="@color/transparent" />
 
-            <stroke
-                android:width="1dp"
-                android:color="#d6d6d6" />
+            <stroke android:width="1dp" android:color="#d6d6d6" />
 
-            <corners
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp"
-                android:bottomLeftRadius="10dp"
-                android:bottomRightRadius="10dp" />
+            <corners android:bottomLeftRadius="10dp" android:bottomRightRadius="10dp" android:topLeftRadius="10dp" android:topRightRadius="10dp" />
         </shape>
     </item>
 
@@ -20,15 +14,9 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="@color/transparent" />
 
-            <stroke
-                android:width="1dp"
-                android:color="#000000" />
+            <stroke android:width="1dp" android:color="#000000" />
 
-            <corners
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp"
-                android:bottomLeftRadius="10dp"
-                android:bottomRightRadius="10dp" />
+            <corners android:bottomLeftRadius="10dp" android:bottomRightRadius="10dp" android:topLeftRadius="10dp" android:topRightRadius="10dp" />
         </shape>
     </item>
 

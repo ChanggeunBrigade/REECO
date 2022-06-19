@@ -24,6 +24,56 @@ public class MainActivity extends AppCompatActivity {
     private final BackKeyHandler backKeyHandler = new BackKeyHandler(this);
     private GridView gridList;
 
+    public static void checkFilePermission(Context mContext) {
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && !isFileGranted(mContext)) {
+            Log.i("---", "---");
+            Log.e("//===========//", "================================================");
+            Log.i("", "\n" + "[C_Permission >> checkFilePermission() :: 앱 파일 접근 권한 상태 확인]");
+            Log.i("", "\n" + "[상태 :: " + "앱 파일 접근 권한 부여되지 않은 상태 >> 앱 파일 접근 권한 설정 창 이동 실시" + "]");
+            Log.e("//===========//", "================================================");
+            Log.i("---", "---");
+
+            // [안드로이드 R 버전 이상 파일 접근 권한 필요]
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            Uri uri = Uri.fromParts("package", mContext.getPackageName(), null);
+            intent.setData(uri);
+            mContext.startActivity(intent);
+        } else if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && isFileGranted(mContext)) {
+            Log.i("---", "---");
+            Log.w("//===========//", "================================================");
+            Log.i("", "\n" + "[C_Permission >> checkFilePermission() :: 앱 파일 접근 권한 상태 확인]");
+            Log.i("", "\n" + "[상태 :: " + "앱 파일 접근 권한 부여된 상태" + "]");
+            Log.w("//===========//", "================================================");
+            Log.i("---", "---");
+        } else {
+            Log.i("---", "---");
+            Log.d("//===========//", "================================================");
+            Log.i("", "\n" + "[C_Permission >> checkFilePermission() :: 앱 파일 접근 권한 상태 확인]");
+            Log.i("", "\n" + "[상태 :: " + "Android 11 버전 미만 단말기" + "]");
+            Log.d("//===========//", "================================================");
+            Log.i("---", "---");
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.R)
+    private static boolean isFileGranted(Context mContext) {
+
+        boolean granted = false;
+
+        try {
+            if (Environment.isExternalStorageManager() == true) {
+                granted = true;
+            } else {
+                granted = false;
+            }
+
+        } catch (Throwable why) {
+            why.printStackTrace();
+        }
+
+        return granted;
+    }
+
     @Override
     public void onBackPressed() {
         backKeyHandler.onBackPressed();
@@ -67,58 +117,5 @@ public class MainActivity extends AppCompatActivity {
 
             startActivity(intent);
         });
-    }
-
-    public static void checkFilePermission(Context mContext) {
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && !isFileGranted(mContext)){
-            Log.i("---","---");
-            Log.e("//===========//","================================================");
-            Log.i("","\n"+"[C_Permission >> checkFilePermission() :: 앱 파일 접근 권한 상태 확인]");
-            Log.i("","\n"+"[상태 :: "+"앱 파일 접근 권한 부여되지 않은 상태 >> 앱 파일 접근 권한 설정 창 이동 실시"+"]");
-            Log.e("//===========//","================================================");
-            Log.i("---","---");
-
-            // [안드로이드 R 버전 이상 파일 접근 권한 필요]
-            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            Uri uri = Uri.fromParts("package", mContext.getPackageName(), null);
-            intent.setData(uri);
-            mContext.startActivity(intent);
-        }
-        else if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && isFileGranted(mContext)) {
-            Log.i("---","---");
-            Log.w("//===========//","================================================");
-            Log.i("","\n"+"[C_Permission >> checkFilePermission() :: 앱 파일 접근 권한 상태 확인]");
-            Log.i("","\n"+"[상태 :: "+"앱 파일 접근 권한 부여된 상태"+"]");
-            Log.w("//===========//","================================================");
-            Log.i("---","---");
-        }
-        else {
-            Log.i("---","---");
-            Log.d("//===========//","================================================");
-            Log.i("","\n"+"[C_Permission >> checkFilePermission() :: 앱 파일 접근 권한 상태 확인]");
-            Log.i("","\n"+"[상태 :: "+"Android 11 버전 미만 단말기"+"]");
-            Log.d("//===========//","================================================");
-            Log.i("---","---");
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.R)
-    private static boolean isFileGranted(Context mContext) {
-
-        boolean granted = false;
-
-        try {
-            if(Environment.isExternalStorageManager() == true) {
-                granted = true;
-            }
-            else {
-                granted = false;
-            }
-
-        } catch (Throwable why) {
-            why.printStackTrace();
-        }
-
-        return granted;
     }
 }

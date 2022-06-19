@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_margin="30dp">
+    android:layout_margin="30dp"
+    android:orientation="vertical">
 
 
     <TextView
-        style="@style/CustomTextViewTitleStyle"
         android:id="@+id/titleTextView"
+        style="@style/CustomTextViewTitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -29,28 +29,28 @@
             android:src="@drawable/warning" />
 
         <TextView
-            style="@style/CustomTextViewStyle"
             android:id="@+id/dialogTextView1"
+            style="@style/CustomTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="지금 삭제한 정보는 다시 복구되지 않습니다."
-            android:textSize="10dp"
-            android:lineSpacingExtra="5dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="2dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:lineSpacingExtra="5dp"
+            android:text="지금 삭제한 정보는 다시 복구되지 않습니다."
+            android:textSize="10dp" />
 
     </LinearLayout>
 
     <TextView
-        style="@style/CustomTextViewStyle"
         android:id="@+id/dialogtextView2"
+        style="@style/CustomTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="마지막으로 확인해주시기 바랍니다."
-        android:textSize="10dp"
+        android:layout_marginBottom="25dp"
         android:lineSpacingExtra="5dp"
-        android:layout_marginBottom="25dp"/>
+        android:text="마지막으로 확인해주시기 바랍니다."
+        android:textSize="10dp" />
 
 
     <android.widget.Button

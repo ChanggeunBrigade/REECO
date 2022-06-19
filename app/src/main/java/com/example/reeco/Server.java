@@ -85,7 +85,11 @@ public class Server {
     }
 
     @NonNull
-    public String getCompiler() { return compiler; }
+    public String getCompiler() {
+        return compiler;
+    }
 
-    public void setCompiler(@NonNull String compiler) { this.compiler = compiler; }
+    public void setCompiler(@NonNull String compiler) {
+        this.compiler = compiler;
+    }
 }
