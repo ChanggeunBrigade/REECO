@@ -56,7 +56,7 @@
                 android:dropDownSelector="@color/black"
                 android:fontFamily="@font/hack"
                 android:gravity="top"
-                android:hint=""
+                android:hint="                     "
                 android:inputType="textMultiLine"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
