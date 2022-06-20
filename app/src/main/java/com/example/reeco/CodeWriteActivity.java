@@ -328,17 +328,24 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
             channelExec.setCommand("cd /tmp && java " + fileExt);
 
             System.out.println("cd /tmp && java " + fileExt);
+            InputStream errorStream = channelExec.getErrStream();
             InputStream inputStream = channelExec.getInputStream();
             channelExec.connect();
 
             byte[] buffer = new byte[8192];
-            int decodedLength;
+            int decodedLength = 0;
 
             response = new StringBuilder();
-            while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0) {
+
+            // stderr stream
+            while ((decodedLength = errorStream.read(buffer, 0, buffer.length)) > 0) {
                 response.append(new String(buffer, 0, decodedLength));
             }
 
+            // stdout stream
+            while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0) {
+                response.append(new String(buffer, 0, decodedLength));
+            }
         } catch (JSchException je) {
             je.printStackTrace();
         } catch (IOException ie) {
