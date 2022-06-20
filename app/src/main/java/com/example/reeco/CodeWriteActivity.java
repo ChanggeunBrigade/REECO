@@ -431,22 +431,24 @@ public class CodeWriteActivity extends AppCompatActivity implements PickiTCallba
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.openFile:
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("text/*");
-                //noinspection deprecation
-                startActivityForResult(intent, 1);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setType("text/*");
+                    //noinspection deprecation
+                    startActivityForResult(intent, 1);
 
-                Menu menu = toolbar.getMenu();
+                    Menu menu = toolbar.getMenu();
 
-                MenuItem menuSave = menu.findItem(R.id.saveFile);
-                MenuItem menuSearch = menu.findItem(R.id.searchText);
+                    MenuItem menuSave = menu.findItem(R.id.saveFile);
+                    MenuItem menuSearch = menu.findItem(R.id.searchText);
 
-                menuSave.setEnabled(true);
-                menuSearch.setEnabled(true);
-
+                    menuSave.setEnabled(true);
+                    menuSearch.setEnabled(true);
+                } catch (Exception ignored) {
+                    // 예외가 발생하면 그냥 무시하도록 합니다.
+                }
                 break;
-
             case R.id.saveFile:
                 try {
                     String txt = edtCodeWrite.getText().toString();
